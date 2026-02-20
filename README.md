@@ -1,4 +1,4 @@
-# 🃏 Burraco Tournament Manager
+# 🃏 Burraco Manager App
 
 Web application per la gestione di tornei di burraco con formazione squadre, generazione partite e validazione distribuita dei punteggi.
 
