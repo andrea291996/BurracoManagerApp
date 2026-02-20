@@ -1,0 +1,157 @@
+<style>
+    .nb-reg-container {
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 40px;
+        border: 4px solid #000;
+        background: #fff;
+        box-shadow: 15px 15px 0px #000;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .nb-reg-title {
+        margin: 0 0 10px 0;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-weight: 900;
+        text-align: center;
+        font-size: 1.8rem;
+    }
+
+    .nb-reg-subtitle {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+        color: #666;
+    }
+
+    .nb-type-selector {
+        display: flex;
+        border: 2px solid #000;
+        margin-bottom: 30px;
+        background: #000;
+    }
+
+    .nb-type-label {
+        flex: 1;
+        text-align: center;
+        padding: 15px;
+        cursor: pointer;
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        transition: 0.2s;
+    }
+
+    /* Form Styles */
+    .nb-reg-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nb-reg-input {
+        padding: 15px;
+        border: 2px solid #000;
+        font-weight: 700;
+        outline: none;
+        font-family: inherit;
+    }
+
+    .nb-input-label {
+        font-size: 0.6rem;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .nb-reg-btn {
+        padding: 20px;
+        background: #000;
+        color: #fff;
+        border: 2px solid #000;
+        text-transform: uppercase;
+        font-weight: 900;
+        letter-spacing: 2px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.2s;
+    }
+
+    .nb-reg-btn:hover {
+        background: #fff;
+        color: #000;
+    }
+</style>
+
+<div class="nb-reg-container">
+    
+    <h2 class="nb-reg-title">Registrazione</h2>
+    <p class="nb-reg-subtitle">Unisciti alla nostra community</p>
+
+    <div class="nb-type-selector">
+        <label class="nb-type-label" id="label-giocatore" style="background: #fff; color: #000;">
+            <input type="radio" name="tipologia-utente" value="giocatore" checked style="display: none;"> Giocatore
+        </label>
+        <label class="nb-type-label" id="label-circolo" style="background: #000; color: #fff;">
+            <input type="radio" name="tipologia-utente" value="circolo" style="display: none;"> Circolo
+        </label>
+    </div>
+
+    <form id="form-giocatore" method="post" action="registrazione" class="nb-reg-form">
+        <input type="hidden" name="tipologia" value="giocatore">
+        <input name="nome" type="text" placeholder="NOME" class="nb-reg-input">
+        <input name="cognome" type="text" placeholder="COGNOME" class="nb-reg-input">
+        <input name="email" type="email" placeholder="EMAIL" class="nb-reg-input">
+        <input name="password" type="password" placeholder="PASSWORD" class="nb-reg-input">
+        <input name="indirizzo" type="text" placeholder="INDIRIZZO (VIA ROMA)" class="nb-reg-input">
+        
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+            <label class="nb-input-label">Distanza max (metri)</label>
+            <input name="distanzamassima" type="number" placeholder="es. 5000" class="nb-reg-input">
+        </div>
+        
+        <button type="submit" class="nb-reg-btn">Registrati come Giocatore</button>
+    </form>
+
+    <form id="form-circolo" method="post" action="registrazione" class="nb-reg-form" style="display: none;">
+        <input type="hidden" name="tipologia" value="circolo">
+        <input name="nome" type="text" placeholder="NOME CIRCOLO" class="nb-reg-input">
+        <input name="email" type="email" placeholder="EMAIL CIRCOLO" class="nb-reg-input">
+        <input name="password" type="password" placeholder="PASSWORD" class="nb-reg-input">
+        <input name="indirizzo" type="text" placeholder="INDIRIZZO CIRCOLO" class="nb-reg-input">
+        
+        <button type="submit" class="nb-reg-btn">Registrati come Circolo</button>
+    </form>
+
+</div>
+
+<script>
+    const radioButtons = document.querySelectorAll('input[name="tipologia-utente"]');
+    const formGiocatore = document.getElementById('form-giocatore');
+    const formCircolo = document.getElementById('form-circolo');
+    const labelGiocatore = document.getElementById('label-giocatore');
+    const labelCircolo = document.getElementById('label-circolo');
+
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.value === 'giocatore') {
+                formGiocatore.style.display = 'flex';
+                formCircolo.style.display = 'none';
+                labelGiocatore.style.background = '#fff';
+                labelGiocatore.style.color = '#000';
+                labelCircolo.style.background = '#000';
+                labelCircolo.style.color = '#fff';
+            } else {
+                formGiocatore.style.display = 'none';
+                formCircolo.style.display = 'flex';
+                labelGiocatore.style.background = '#000';
+                labelGiocatore.style.color = '#fff';
+                labelCircolo.style.background = '#fff';
+                labelCircolo.style.color = '#000';
+            }
+        });
+    });
+</script>

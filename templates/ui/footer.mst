@@ -1,0 +1,5 @@
+<footer class="bg-dark text-light py-3 position-fixed bottom-0 w-100">
+  <div class="container text-center small">
+    (: Andrea Carminati :)
+  </div>
+</footer>

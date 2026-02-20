@@ -1,0 +1,22 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <h5>Giocatori disponibili</h5>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            {{#single}}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{getnome}} {{getcognome}}
+                    <form action="/invia-richiesta" method="POST" style="margin:0;">
+                        <input type="hidden" name="idtorneo" value="{{idtorneo}}">
+                        <input type="hidden" name="iddestinatario" value="{{getidgiocatore}}">
+                        <button type="submit" class="btn btn-primary btn-sm">Invia Richiesta</button>
+                    </form>
+                </li>
+            {{/single}}
+            {{^single}}
+                <li class="list-group-item text-muted">Nessun compagno disponibile al momento.</li>
+            {{/single}}
+        </ul>
+    </div>
+</div>

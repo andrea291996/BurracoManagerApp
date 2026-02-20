@@ -1,0 +1,17 @@
+<html>
+    <head>
+    {{> head}}
+    </head>
+    <body class="pb-5">
+        {{#header}}
+            {{{render}}}
+        {{/header}}
+        {{#content}}
+            {{{render}}}
+        {{/content}}
+        {{#footer}}
+            {{{render}}}
+        {{/footer}}
+        {{>script}}
+    </body>
+</html>

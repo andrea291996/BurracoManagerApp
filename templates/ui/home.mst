@@ -1,0 +1,80 @@
+
+
+<style>
+    /* RESET & BASE */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #fff; color: #000; line-height: 1.1; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+    /* HERO SECTION */
+    .hero { padding: 120px 0; border-bottom: 8px solid #000; text-align: center}
+    .hero-title { font-size: 8rem; text-transform: uppercase; font-weight: 900; letter-spacing: -5px; margin-bottom: 20px; }
+    .hero-subtitle { font-size: 1.5rem; text-transform: uppercase; font-weight: 700; letter-spacing: 5px; color: #000; }
+
+    /* INFO SECTION */
+    .info-section { padding: 100px 0; }
+    .nb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 100px; }
+    
+    .section-title { font-size: 3.5rem; text-transform: uppercase; font-weight: 900; letter-spacing: -2px; margin-bottom: 30px; line-height: 0.9; }
+    .section-desc { font-size: 1.2rem; font-weight: 500; line-height: 1.5; color: #333; }
+
+    /* BIG STATEMENT */
+    .statement { background: #000; color: #fff; padding: 100px 0; text-transform: uppercase; }
+    .statement-text { font-size: 4rem; font-weight: 900; letter-spacing: -2px; text-align: center; line-height: 1; }
+
+    @media (max-width: 768px) {
+        .hero-title { font-size: 4rem; letter-spacing: -2px; }
+        .nb-row { grid-template-columns: 1fr; gap: 40px; }
+        .statement-text { font-size: 2rem; }
+    }
+</style>
+
+<section class="hero">
+    <div class="container">
+        <h1 class="hero-title">Burraco<br>Platform</h1>
+        <p class="hero-subtitle">Il nuovo standard per la gestione dei tornei.</p>
+    </div>
+</section>
+
+<section class="info-section">
+    <div class="container">
+        
+        <div class="nb-row">
+            <div>
+                <h2 class="section-title">Esperienza per i Giocatori</h2>
+                <p class="section-desc">
+                    Una gestione semplificata della propria attività agonistica. Dalla ricerca dei tornei locali alla consultazione delle classifiche in tempo reale. Ogni partita viene registrata, ogni vittoria contribuisce al posizionamento nel ranking globale, garantendo una competizione trasparente e meritocratica.
+                </p>
+            </div>
+            <div>
+                <h2 class="section-title">Soluzioni per i Circoli</h2>
+                <p class="section-desc">
+                    Strumenti avanzati per l'organizzazione logistica degli eventi. I circoli possono coordinare le iscrizioni, gestire l'assegnazione dei tavoli e automatizzare il calcolo dei punteggi. La piattaforma riduce drasticamente i tempi di gestione burocratica, permettendo di concentrarsi sulla qualità dell'accoglienza.
+                </p>
+            </div>
+        </div>
+
+        <div class="nb-row">
+            <div>
+                <h2 class="section-title">Live Score & Ranking</h2>
+                <p class="section-desc">
+                    Algoritmi dedicati aggiornano i risultati istantaneamente. La community può seguire l'andamento dei tornei in corso, visualizzare i calendari delle fasi finali e analizzare lo storico delle performance di ogni coppia o singolo partecipante.
+                </p>
+            </div>
+            <div>
+                <h2 class="section-title">Standard e Regolamenti</h2>
+                <p class="section-desc">
+                    Integrazione totale con i regolamenti ufficiali. La piattaforma assicura che ogni evento rispetti i criteri di gioco standardizzati, fornendo una base solida sia per tornei amatoriali che per competizioni ufficiali di alto livello.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="statement">
+    <div class="container">
+        <p class="statement-text">L'evoluzione digitale del Burraco.<br>Nessun compromesso, solo gioco.</p>
+    </div>
+</section>

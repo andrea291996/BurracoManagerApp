@@ -1,0 +1,40 @@
+<?php
+
+/* 
+*  ClassName: {{classname}}
+*  Generated: {{date}}
+*  Author: {{author}}
+*  Table: {{table}}
+*  Database: {{database}}
+*/
+
+define("{{macro}}_TABLE","{{table}}");
+
+class {{classname}} extends DBObject
+{
+	{{#attributes}}
+	protected ${{name}};
+	{{/attributes}}
+
+	// Class Constructor
+	public function __construct() {
+		parent::__construct({{macro}}_TABLE);
+        $this->primaryKey="{{pk}}";
+		return $this;
+	}
+	//Getter methods
+{{#attributes}}
+	function get{{name}}(){
+		return $this->{{name}};
+	}
+
+{{/attributes}}
+
+	//Setter methods
+{{#attributes}}
+	function set{{name}}($value){
+		$this->{{name}}=$value;
+	}
+
+{{/attributes}}
+}

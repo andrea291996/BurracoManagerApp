@@ -1,0 +1,147 @@
+<style>
+    .nb-nav {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background: #fff;
+        border-bottom: 4px solid #000;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .nb-brand {
+        text-decoration: none;
+        color: #000;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 1.5rem;
+        padding: 20px 0;
+        display: block;
+    }
+
+    .nb-menu-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .nb-menu-item {
+        position: relative;
+    }
+
+    .nb-nav-link {
+        display: block;
+        padding: 25px 20px;
+        text-decoration: none;
+        color: #000;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        transition: 0.2s;
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+
+    .nb-dropdown-toggle {
+        padding: 25px 20px;
+        cursor: pointer;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+    }
+
+    .nb-dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        border: 3px solid #000;
+        list-style: none;
+        padding: 0;
+        min-width: 200px;
+        box-shadow: 8px 8px 0px #000;
+    }
+
+    .nb-dropdown-item {
+        border-bottom: 1px solid #eee;
+    }
+
+    .nb-dropdown-link {
+        display: block;
+        padding: 15px 20px;
+        text-decoration: none;
+        color: #000;
+        font-weight: 700;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        transition: 0.2s;
+    }
+
+    .nb-divider {
+        border: 0;
+        border-top: 2px solid #000;
+        margin: 0;
+    }
+</style>
+
+<nav class="nb-nav">
+    <a href="{{brand.href}}" class="nb-brand">
+        {{brand.title}}
+    </a>
+
+    <ul class="nb-menu-list">
+        {{#items}}
+            <li class="nb-menu-item" style="{{#isRight}}margin-left: auto;{{/isRight}}">
+                
+                {{#hasChilds}}
+                    <div class="nb-dropdown-toggle" 
+                         onmouseover="this.style.background='#000'; this.style.color='#fff'; this.nextElementSibling.style.display='block';" 
+                         onmouseout="this.style.background='none'; this.style.color='#000'; this.nextElementSibling.style.display='none';">
+                        {{title}} <span style="margin-left: 8px; font-size: 0.6rem;">▼</span>
+                    </div>
+                    
+                    <ul class="nb-dropdown-menu" 
+                        onmouseover="this.style.display='block';" 
+                        onmouseout="this.style.display='none';">
+                        {{#childs}}
+                            {{#isDivider}}
+                                <hr class="nb-divider">
+                            {{/isDivider}}
+                            {{^isDivider}}
+                                <li class="nb-dropdown-item">
+                                    <a href="{{href}}" class="nb-dropdown-link"
+                                       onmouseover="this.style.background='#000'; this.style.color='#fff';" 
+                                       onmouseout="this.style.background='none'; this.style.color='#000';">
+                                        {{title}}
+                                    </a>
+                                </li>
+                            {{/isDivider}}
+                        {{/childs}}
+                    </ul>
+                {{/hasChilds}}
+                
+                {{^hasChilds}}
+                    <a href="{{href}}" class="nb-nav-link"
+                       onmouseover="this.style.background='#000'; this.style.color='#fff';" 
+                       onmouseout="this.style.background='none'; this.style.color='#000';">
+                        {{title}}
+                    </a>
+                {{/hasChilds}}
+
+            </li>
+        {{/items}}
+    </ul>
+</nav>

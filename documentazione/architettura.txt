@@ -1,0 +1,44 @@
+TorneoRepository
+    Dammi stato torneo
+    Dammi tutti i tornei
+    Dammi torneo per torneoId
+    Dammi tornei per giocatoreId
+    Dammi tornei per circoloId
+    é giocatore iscritto? per torneoId
+    é circolo iscritto? per torneiId
+
+TorneoService
+    Ottieni miei tornei per userId
+    Ottieni tutti tornei
+    Ottieni info torneo per torneoId
+    Ottieni giocatori iscritti al torneo per torneoId
+    Ottieni circoli iscritti al torneo per torneo Id
+
+_________________________________________________________________________________________________________________________________________________
+
+SquadraRepository
+    Dammi tutte squadre
+    Dammi squadre per torneoId
+    Dammi squadra per giocatoreId e torneoId
+    Dammi compagno di squadra per userId e torneoId
+    Dammi miei mittenti richiestasquadra per torneoId e userId
+    Dammi miei destinatari richiestasquadra per torneoId e userId
+    Ha una squadra? per torneoId useriId
+
+SquadraService
+    Ottieni dati mia squadra (squadra, compagno, mittenti, destinatari, single) per userId e per TorneoId
+    Ottieni tutte squadre per torneoId
+    Ottieni tutte squadre
+
+_________________________________________________________________________________________________________________________________________________
+
+UtentiRepository
+    Dammi tutti i giocatori
+    Dammi tutti i circoli
+    Dammi giocatori iscritti al torneo per torneoId (parametro per dare tutti tranne $userId)
+    Dammi circoli iscritti al torneo per torneoId
+
+UtentiService
+    Ottieni tutti i giocatori
+    Ottieni tutti i circoli
+

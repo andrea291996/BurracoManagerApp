@@ -1,0 +1,20 @@
+
+<div class="card mb-3 border-info">
+    <div class="card-header bg-info text-white">
+        <h5>Le tue richieste in attesa</h5>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            {{#destinatari}}
+                <li class="list-group-item d-flex justify-content-between align-items-center text-muted">
+                    <span>Hai invitato: {{account.getnome}} {{account.getcognome}}</span>
+                    <span class="badge badge-info px-2 py-1">In attesa...</span>
+                    <a href="/annulla-richiesta?id={{idrichiesta}}" class="text-danger small">Annulla</a>
+                </li>
+            {{/destinatari}}
+            {{^destinatari}}
+                <li class="list-group-item text-muted italic">Non hai ancora inviato nessuna richiesta.</li>
+            {{/destinatari}}
+        </ul>
+    </div>
+</div>

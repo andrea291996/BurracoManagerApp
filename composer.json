@@ -1,0 +1,9 @@
+{
+    "require": {
+        "mustache/mustache": "^3.0",
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.8"
+    }
+}
+
+

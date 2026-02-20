@@ -1,0 +1,12 @@
+<div class="card mb-4 border-success">
+    <div class="card-header bg-success text-white">
+        <h5>La tua Squadra</h5>
+    </div>
+    <div class="card-body text-center">
+        <p class="lead">Sei iscritto a questo torneo in coppia con {{compagno.getnome}} {{compagno.getcognome}}!</p>
+        <p>ID Squadra: <strong>{{squadra.getidsquadra}}</strong></p>
+        <div class="alert alert-info">
+            In bocca al lupo per il torneo!
+        </div>
+    </div>
+</div>

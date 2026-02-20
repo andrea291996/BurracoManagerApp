@@ -1,0 +1,21 @@
+<div class="card mb-3 border-warning">
+    <div class="card-header bg-warning text-dark">
+        <h5>Inviti ricevuti</h5>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            {{#mittenti}}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Da: <strong>{{account.getnome}} {{account.getcognome}}</strong></span>
+                    <div>
+                        <a href="/accetta-richiesta?id={{idrichiesta}}" class="btn btn-success btn-sm">Accetta</a>
+                        <a href="/rifiuta-richiesta?id={{idrichiesta}}" class="btn btn-outline-danger btn-sm">Rifiuta</a>
+                    </div>
+                </li>
+            {{/mittenti}}
+            {{^mittenti}}
+                <li class="list-group-item text-muted">Non hai ricevuto nuovi inviti.</li>
+            {{/mittenti}}
+        </ul>
+    </div>
+</div>
