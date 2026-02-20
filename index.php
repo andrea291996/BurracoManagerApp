@@ -8,6 +8,7 @@ error_reporting(E_ALL);
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/autoload.php';
 require __DIR__ . '/config.php';
+require __DIR__ . '/secret.php';
 require __DIR__ . '/testi.php';
 
 $app = Application::instance(); 

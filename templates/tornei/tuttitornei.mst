@@ -84,7 +84,10 @@
                 {{/iscriviti}}
 
                 {{#la_mia_squadra}}
+                    <form method="GET" action="miasquadra">
+                    <input type="hidden" name="idtorneo" value="{{id_torneo}}">
                 <button class="btn-participation-black">La Mia Squadra</button>
+                    </form>
                 {{/la_mia_squadra}}
 
                 {{#disiscriviti}}

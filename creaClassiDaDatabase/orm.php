@@ -2,6 +2,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../autoload.php';
 require __DIR__ . '/../config.php';
+require __DIR__ . '/../secret.php';
 
 function help(){
     echo "Usage:".PHP_EOL;

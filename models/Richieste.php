@@ -2,7 +2,7 @@
 
 /* 
 *  ClassName: Richieste
-*  Generated: 2026-02-18 10:22:25
+*  Generated: 2026-02-20 10:43:52
 *  Author: Andrea Carminati (default)
 *  Table: richieste
 *  Database: burraco
@@ -17,6 +17,8 @@ class Richieste extends DBObject
 	protected $idmittente;
 	protected $iddestinatario;
 	protected $stato;
+	protected $datainvio;
+	protected $datafine;
 
 	// Class Constructor
 	public function __construct() {
@@ -45,6 +47,14 @@ class Richieste extends DBObject
 		return $this->stato;
 	}
 
+	function getdatainvio(){
+		return $this->datainvio;
+	}
+
+	function getdatafine(){
+		return $this->datafine;
+	}
+
 
 	//Setter methods
 	function setidtorneo($value){
@@ -65,6 +75,14 @@ class Richieste extends DBObject
 
 	function setstato($value){
 		$this->stato=$value;
+	}
+
+	function setdatainvio($value){
+		$this->datainvio=$value;
+	}
+
+	function setdatafine($value){
+		$this->datafine=$value;
 	}
 
 }

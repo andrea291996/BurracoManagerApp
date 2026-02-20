@@ -86,9 +86,9 @@ class SquadraRepository{
     }
 
     public function dammiMieiMittenti($userId, $torneoId): array{
-        $sql = "SELECT * FROM richieste WHERE idtorneo = ? AND iddestinatario = ?";
+        $sql = "SELECT * FROM richieste WHERE idtorneo = ? AND iddestinatario = ? AND stato = ?";
         $sth = $this->database->prepare($sql);
-        $sth->execute([$torneoId, $userId]);
+        $sth->execute([$torneoId, $userId, "in attesa"]);
         $richiesteGrezze = $sth->fetchAll();
         $mittenti = [];
         if(!empty($richiesteGrezze)){
@@ -96,10 +96,9 @@ class SquadraRepository{
             $mittente = new Accountgiocatori();
             $mittente->select(['idgiocatore' => $richiesta['idmittente']]);
             $mittente->setpassword(null);
-            $mittenti['richiesta'][] = [
+            $mittenti[] = [
                 'mittente' => $mittente,
-                'idrichiesta' => $richiesta['idrichiesta'],
-                'stato' => $richiesta['stato']      
+                'idrichiesta' => $richiesta['idrichiesta']     
             ];
             }
             return $mittenti;
@@ -107,10 +106,10 @@ class SquadraRepository{
         return [];
     }
 
-    public function dammiMieiDestinatari($userId, $torneoId): array | null{
-        $sql = "SELECT * FROM richieste WHERE idtorneo = ? AND idmittente = ?";
+    public function dammiMieiDestinatari($userId, $torneoId): array{
+        $sql = "SELECT * FROM richieste WHERE idtorneo = ? AND idmittente = ? AND stato = ?";
         $sth = $this->database->prepare($sql);
-        $sth->execute([$torneoId, $userId]);
+        $sth->execute([$torneoId, $userId, "in attesa"]);
         $richiesteGrezze = $sth->fetchAll();
         $destinatari = [];
         if(!empty($richiesteGrezze)){
@@ -118,15 +117,14 @@ class SquadraRepository{
             $destinatario = new Accountgiocatori();
             $destinatario->select(['idgiocatore' => $richiesta['iddestinatario']]);
             $destinatario->setpassword(null);
-            $destinatari['richiesta'][] = [
+            $destinatari[] = [
                 'destinatario' => $destinatario,
-                'idrichiesta' => $richiesta['idrichiesta'],
-                'stato' => $richiesta['stato']      
+                'idrichiesta' => $richiesta['idrichiesta']     
             ];
             }
             return $destinatari;
         }
-        return null;
+        return [];
     }
 
     public function HaSquadra($userId, $torneoId): bool{

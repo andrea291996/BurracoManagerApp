@@ -38,10 +38,6 @@ $routes['GET'] = [
         'pattern' => '/miasquadra',
         'callable' => 'SquadraController:mostraMiaSquadra'
     ],
-    [
-        'pattern' => '/squadre',
-        'callable' => 'SquadraController:mostraTutteSquadre'
-    ],
     //ISCRITTI
     [
         'pattern' => '/utentiiscritti',

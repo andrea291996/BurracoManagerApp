@@ -31,26 +31,26 @@
 .sq-empty { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; color: #ccc; padding: 40px 0; }
 </style>
 
-<section class="sq-section">
+<section class="sq-section" style="border-bottom: none;">
     <div class="sq-container">
-        <h2 class="sq-title">In Attesa di<br>Risposta</h2>
-        <span class="sq-subtitle">Richieste che hai inviato</span>
+        <h2 class="sq-title">Giocatori<br>Disponibili</h2>
+        <span class="sq-subtitle">Senza squadra in questo torneo</span>
 
         <div class="sq-grid">
-            {{#richiesteinviate}}
-            <div class="sq-card" style="border-style: dashed;">
-                <div class="sq-name" style="color: #888;">{{nomedestinatario}}<br>{{cognomedestinatario}}</div>
+            {{#giocatorisingle}}
+            <div class="sq-card">
+                <div class="sq-name">{{nome}}<br>{{cognome}}</div>
                 
-                <form method="POST" action="annulla-richiesta">
-                    <input type="hidden" name="idrichiesta" value="{{idrichiesta}}">
-                    <button type="submit" class="sq-btn sq-btn-danger">Annulla Richiesta</button>
+                <form method="POST" action="invia-richiesta">
+                    <input type="hidden" name="iddestinatario" value="{{idgiocatore}}">
+                    <button type="submit" class="sq-btn sq-btn-black">Invia Proposta</button>
                 </form>
             </div>
-            {{/richiesteinviate}}
+            {{/giocatorisingle}}
 
-            {{^richiesteinviate}}
-            <p class="sq-empty">Non hai inviato nessuna richiesta.</p>
-            {{/richiesteinviate}}
+            {{^giocatorisingle}}
+            <p class="sq-empty">Tutti i giocatori sono già impegnati.</p>
+            {{/giocatorisingle}}
         </div>
     </div>
 </section>

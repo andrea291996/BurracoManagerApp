@@ -10,6 +10,21 @@ class SquadraController extends Controller{
     {
         $this->squadraService = new SquadraService();
     }
+
+    public function mostraMiaSquadra(Request $request, Response $response, $args){
+        $page = PageConfigurator::instance()->getPage(); 
+        $page->setTitle("La mia squadra");
+        $user = $request->getAttribute('user');
+        $idTorneo = $request->getQueryParams();
+        $idTorneo = $idTorneo['idtorneo'];
+        $richiesteRicevute = $this->squadraService->ottieniRichiesteRicevute($user, $idTorneo);
+        $page->add("content", new SquadreView("squadra/richiestericevute", ['richiestericevute'=>$richiesteRicevute]));
+        $richiesteInviate = $this->squadraService->ottieniRichiesteInviate($user, $idTorneo);
+        $page->add("content", new SquadreView("squadra/richiesteinviate", ['richiesteinviate'=>$richiesteInviate]));
+        $giocatoriSingle = $this->squadraService->ottieniGiocatoriSingleNonMieiMittentiENonMieiDestinatari($user, $idTorneo);
+        $page->add("content", new SquadreView("squadra/giocatorisingle", ['giocatorisingle'=>$giocatoriSingle]));
+        return $response;
+    }
     /*
     function mostraMiaSquadra(Request $request, Response $response, $args) {    
         $page = PageConfigurator::instance()->getPage(); 
