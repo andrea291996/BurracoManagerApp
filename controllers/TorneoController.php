@@ -70,30 +70,5 @@ class TorneoController extends Controller{
         return $response->withHeader("Location", "./tornei")->withStatus(301);
     }
 
-
-    /*
-    function infoTorneo(Request $request, Response $response, $args){
-        $page = PageConfigurator::instance()->getPage(); 
-        $page->setTitle("Info Torneo");
-        $data = $request->getQueryParams();
-        $idTorneo = $data['idtorneo'];
-        $risultato = $this->torneoService->infoTorneo($idTorneo);
-        $data = $risultato['data'];
-        $template = $risultato['template'];
-        $page->add("content", new TorneiView($template, $data));
-        return $response;
-    }
-
-    function mostraMieiTornei(Request $request, Response $response, $args){
-        $page = PageConfigurator::instance()->getPage(); 
-        $page->setTitle("I Miei Tornei");
-        $user = $request->getAttribute('user');
-        $risultato = $this->torneoService->mostraMieiTornei($user);
-        $data = $risultato['data'];
-        $template = $risultato['template'];
-        $page->add("content", new TorneiView($template, $data));
-        return $response;
-    }
-    */   
 }
 

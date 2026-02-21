@@ -12,16 +12,6 @@ class UtentiController extends Controller{
         $this->utentiService = new UtentiService;
     }
     
-    function mostraTuttiGiocatori(Request $request, Response $response, $args) {  
-        $page = PageConfigurator::instance()->getPage(); 
-        $page->setTitle("Utenti");  
-        $user = $request->getAttribute('user');
-        if($user->isAmministratore()){
-            $utenti = $this->utentiService->mostraTuttiGiocatori();
-            $page->add("content", new IscrittiView("utenti/tuttiutenti", $utenti));
-        }
-        return $response;
-    }
         
 }
 

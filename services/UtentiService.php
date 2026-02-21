@@ -16,23 +16,4 @@ class UtentiService{
     {
         $this->utentiRepository = new UtentiRepository;
     }
-
-    /*
-    public function ottieniTuttiGiocatori(): array {
-        $giocatori = $this->utentiRepository->dammiTuttiGiocatori();
-        $data = [];
-            if($giocatori){
-                foreach($giocatori as $giocatore){
-                    $data[] = [
-                        "nome" => $giocatore->getnome(),
-                        "cognome" => $giocatore->getcognome()
-                    ];
-                }
-            }
-        return $data;
-    }
-    */
-    
-
-    
 }

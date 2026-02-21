@@ -88,19 +88,4 @@ class UtentiRepository{
         }
         return [];
     }
-
-    //VECCHIA
-    /*
-    public function dammiTuttiUtenti(){
-        $utentiGezzi = $this->database->select("accountgiocatori", [], []);
-        $utenti = [];
-        foreach($utentiGezzi as $elemento){
-            $utente = new Accountgiocatori();
-            $utente->select(['idgiocatore' => $elemento['idgiocatore']]);
-            $utente->setpassword(null);
-            $utenti[] = $utente;
-        }
-        return $utenti;
-    }
-    */
 }

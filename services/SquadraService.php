@@ -135,36 +135,4 @@ class SquadraService{
         }
 
     }
-    /*
-    public function ottieniDatiMiaSquadra($userId, $torneoId) {
-        $squadra = $this->squadraRepository->dammiSquadra($userId, $torneoId);
-        $compagno = $this->squadraRepository->dammiCompagnoSquadra($userId, $torneoId);
-        $mittenti = $this->squadraRepository->dammiMieiMittenti($userId, $torneoId);
-        $destinatari = $this->squadraRepository->dammiMieiDestinatari($userId, $torneoId);
-        $giocatoriSenzaDiMe = $this->utentiRepository->dammiGiocatoriIscrittiTorneo($torneoId, $userId);
-        $filtrati = [];
-            if(!empty($giocatoriSenzaDiMe)){
-                foreach($giocatoriSenzaDiMe as $giocatore){
-                    if(!in_array($giocatore, $mittenti) || !in_array($giocatore, $destinatari)){
-                        $filtrati[] = $giocatore;
-                    }
-                }
-            }
-        return [
-            'squadra' => $squadra,
-            'compagno' => $compagno,
-            'mittenti' => $mittenti,
-            'destinatari' => $destinatari,
-            'single' => $filtrati
-        ];
-    }
-
-    public function ottieniTutteSquadrePerTorneo($torneoId){
-        return $this->squadraRepository->dammiSquadrePerTorneo($torneoId);
-    }
-
-    public function ottieniTutteSquadre(){
-        return $this->squadraRepository->dammiTutteSquadre();
-    }
-
-    */
+    
