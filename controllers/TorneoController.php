@@ -58,7 +58,24 @@ class TorneoController extends Controller{
         if($user->isAmministratore()){
             $iscritti = $this->utentiService->ottieniGiocatoriIscrittiTorneo($idTorneo);
             $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => 'tornei', 'titolo' => "Giocatori iscritti"]));
-            $page->add("content", new IscrittiView("tornei/tuttiiscritti", ['iscritti'=> $iscritti]));
+            $page->add("content", new IscrittiView("tornei/giocatore", ['giocatore'=> $iscritti]));
+            return $response;
+        }else{
+            UIMessage::setError(UNAUTHORIZED_OPERATION);
+            return $response->withHeader("Location", "tornei")->withStatus(302);
+        }
+    }
+
+    function mostraGiocatoriSenzaSquadra(Request $request, Response $response, $args){
+        $page = PageConfigurator::instance()->getPage(); 
+        $page->setTitle("Giocatori Senza Squadra");
+        $user = $request->getAttribute('user');
+        $idTorneo = $request->getQueryParams();
+        $idTorneo = $idTorneo['idtorneo'];
+        if($user->isAmministratore()){
+            $single = $this->utentiService->ottieniGiocatoriSenzaSquadra($idTorneo);
+            $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => 'tornei', 'titolo' => "Giocatori senza squadra"]));
+            $page->add("content", new IscrittiView("tornei/giocatore", ['giocatore'=> $single]));
             return $response;
         }else{
             UIMessage::setError(UNAUTHORIZED_OPERATION);

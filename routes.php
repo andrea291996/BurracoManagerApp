@@ -53,8 +53,8 @@ $routes['GET'] = [
     ],
     //GIOCATORI 
     [
-        'pattern' => '/giocatorisingle',
-        'callable' => 'IscrizioneController:mostraGiocatoriSingle'
+        'pattern' => '/giocatorisenzasquadra',
+        'callable' => 'TorneoController:mostraGiocatoriSenzaSquadra'
     ],
     //UTENTI
     [

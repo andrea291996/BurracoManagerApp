@@ -21,10 +21,12 @@ Rifiuta richiesta ricevuta
 
 class SquadraRepository{
     protected $database;
+    protected $utentiRepository;
 
     public function __construct()
     {
         $this->database = Database::instance();
+        $this->utentiRepository = new UtentiRepository;
     }
 
     public function dammiTutteSquadre(): array{
@@ -148,7 +150,17 @@ class SquadraRepository{
         }else{
             return false;
         }
-        
+    }
+
+    public function dammiGiocatoriSenzaSquadra($torneoId): array{
+        $iscritti = $this->utentiRepository->dammiGiocatoriIscrittiTorneo($torneoId);
+        $risultato = [];
+        foreach($iscritti as $giocatore){
+            if(!$this->HaSquadra($giocatore->getidgiocatore(), $torneoId)){
+                $risultato[] = $giocatore;
+            }
+        }
+        return $risultato;
     }
 
     public function inserisciRichiesta($idTorneo, $idMittente, $idDestinatario): bool{

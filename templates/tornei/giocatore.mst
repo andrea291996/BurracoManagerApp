@@ -2,7 +2,7 @@
     <div class="sq-container">
         
         <div class="sq-grid">
-            {{#iscritti}}
+            {{#giocatore}}
             <div class="sq-card">
                 <div class="sq-name">
                     {{nome}} {{cognome}}
@@ -12,13 +12,13 @@
                 <div class="nb-divider" style="margin: 20px 0;"></div>
                 
             </div>
-            {{/iscritti}}
+            {{/giocatore}}
 
-            {{^iscritti}}
+            {{^giocatore}}
             <div class="sq-empty">
-                <p>Nessuna giocatore iscritto a questo torneo.</p>
+                <p>Nessuna giocatore.</p>
             </div>
-            {{/iscritti}}
+            {{/giocatore}}
         </div>
 
     </div>

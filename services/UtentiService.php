@@ -11,10 +11,12 @@ ottieni tutti i circoli
 class UtentiService{
 
     protected $utentiRepository;
+    protected $squadraRepository;
 
     public function __construct()
     {
         $this->utentiRepository = new UtentiRepository;
+        $this->squadraRepository = new SquadraRepository;
     }
 
     public function ottieniGiocatoriIscrittiTorneo($idTorneo){
@@ -24,6 +26,18 @@ class UtentiService{
             $data[] = [
                 'nome' => $iscritto->getnome(),
                 'cognome'=>$iscritto->getcognome()
+            ];
+        }
+        return $data;
+    }
+
+    public function ottieniGiocatoriSenzaSquadra($idTorneo){
+        $giocatori = $this->squadraRepository->dammiGiocatoriSenzaSquadra($idTorneo);
+        $data = [];
+        foreach($giocatori as $giocatore){
+            $data[] = [
+                'nome' => $giocatore->getnome(),
+                'cognome'=>$giocatore->getcognome()
             ];
         }
         return $data;

@@ -79,7 +79,10 @@
                     {{/utenti_iscritti}}
 
                     {{#utenti_iscritti_ma_single}}
+                    <form method="GET" action="giocatorisenzasquadra">
+                        <input type="hidden" name="idtorneo" value="{{id_torneo}}">
                     <button class="btn-admin">Giocatori senza squadra</button>
+                    </form>
                     {{/utenti_iscritti_ma_single}}
 
                     {{#circoli_iscritti}}
