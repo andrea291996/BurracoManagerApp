@@ -19,7 +19,7 @@ class UtentiService{
         $this->squadraRepository = new SquadraRepository;
     }
 
-    public function ottieniGiocatoriIscrittiTorneo($idTorneo){
+    public function ottieniGiocatoriIscrittiTorneo($idTorneo): array{
         $iscritti = $this->utentiRepository->dammiGiocatoriIscrittiTorneo($idTorneo);
         $data = [];
         foreach($iscritti as $iscritto){
@@ -31,7 +31,7 @@ class UtentiService{
         return $data;
     }
 
-    public function ottieniCircoliIscrittiTorneo($idTorneo){
+    public function ottieniCircoliIscrittiTorneo($idTorneo): array{
         $iscritti = $this->utentiRepository->dammiCircoliIscrittiTorneo($idTorneo);
         $data = [];
         foreach($iscritti as $iscritto){
@@ -42,13 +42,36 @@ class UtentiService{
         return $data;
     }
 
-    public function ottieniGiocatoriSenzaSquadra($idTorneo){
+    public function ottieniGiocatoriSenzaSquadra($idTorneo): array{
         $giocatori = $this->squadraRepository->dammiGiocatoriSenzaSquadra($idTorneo);
         $data = [];
         foreach($giocatori as $giocatore){
             $data[] = [
                 'nome' => $giocatore->getnome(),
                 'cognome'=>$giocatore->getcognome()
+            ];
+        }
+        return $data;
+    }
+
+    public function ottieniTuttiUtentiGiocatori(): array{
+        $utentiGiocatori = $this->utentiRepository->dammiTuttiGiocatori();
+        $data = [];
+        foreach($utentiGiocatori as $giocatore){
+            $data[] = [
+                'nome' => $giocatore->getnome(),
+                'cognome'=>$giocatore->getcognome()
+            ];
+        }
+        return $data;
+    }
+
+    public function ottieniTuttiUtentiCircoli(): array{
+        $utentiCircoli = $this->utentiRepository->dammiTuttiCircoli();
+        $data = [];
+        foreach($utentiCircoli as $circolo){
+            $data[] = [
+                'nome' => $circolo->getnome(),
             ];
         }
         return $data;

@@ -60,10 +60,15 @@ $routes['GET'] = [
         'pattern' => '/giocatorisenzasquadra',
         'callable' => 'TorneoController:mostraGiocatoriSenzaSquadra'
     ],
-    //UTENTI
+    //UTENTI ADMIN
     [
         'pattern' => '/utenti',
-        'callable' => 'UtentiController:mostraTuttiGiocatori'
+        'callable' => 'UtentiController:mostraTuttiUtentiGiocatori'
+    ],
+    //CIRCLI ADMIN
+    [
+        'pattern' => '/circoli',
+        'callable' => 'UtentiController:mostraTuttiUtentiCircoli'
     ]
 ];
 
