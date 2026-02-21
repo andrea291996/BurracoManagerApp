@@ -1,0 +1,26 @@
+Genera tutte le combinazioni di partite (Girone all'italiana).
+Calcola la Matrice delle Distanze: Per ogni partita, calcola il costo totale per ogni circolo disponibile.
+Ordina le Partite: Inizia ad assegnare le partite che hanno "poca scelta" (quelle che hanno un solo circolo vicino) per prime.
+Riempi i Circoli: Assegna la partita al circolo con il costo minimo che ha ancora slot liberi (max 4).
+
+ogni giornata massimo 4 partite
+
+squadra1        circolo1
+squadra2        circolo2
+squadra3        circolo3
+
+distanza squadra1-circolo1
+distanza squadra2-circolo1
+distanza squadra3-circolo1
+
+distanza squadra1-circolo2
+distanza squadra2-circolo2
+distanza squadra3-circolo2
+
+distanza squadra1-circolo3
+distanza squadra2-circolo3
+distanza squadra3-circolo3
+
+calcolo tutte le possibili combinazini di partite-circolo
+    6 partite, 2 circoli -> totale 2 alla 6
+scelgo quella con la somma minore

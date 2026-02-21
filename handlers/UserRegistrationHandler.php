@@ -8,29 +8,21 @@ class UserRegistrationHandler
         $this->last_errors=[];
     }
 
-    /**
-     * Recupera il profilo completo basandosi sull'utente loggato
-     */
     function profile($id, $tipo){
         $user = null;
         
-        // Scegliamo la classe corretta in base alla tipologia salvata in sessione
         switch ($tipo) {
             case 'giocatore':       $user = new Accountgiocatori(); break;
             case 'circolo':         $user = new Accountcircoli(); break;
             case 'amministratore':  $user = new Accountamministratori(); break;
         }
-
         if($user && $user->select($id)){
-            $user->setpassword(null); // Mai restituire la password
+            $user->setpassword(null); 
             return $user;
         }
         return null;
     }
 
-    /**
-     * Gestisce la registrazione (principalmente per i giocatori)
-     */
     function registration(array $data) {
         $email = $data['email'] ?? null;
         $password = $data['password'] ?? null;
@@ -38,7 +30,6 @@ class UserRegistrationHandler
         $dataAccount = [];
         $dataProfilo = [];
 
-        // 1. Validazioni base
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->last_errors[] = "Email non valida";
             return false;
@@ -49,17 +40,18 @@ class UserRegistrationHandler
             return false;
         }
 
-        // 2. Controllo Email duplicata su TUTTE le tabelle
         if ($this->emailExists($email)) {
             $this->last_errors[] = "Questa email è già registrata nel sistema";
             return false;
         }
 
-        // 3. Cifratura password
         $data['password'] = self::encryptPassword($password);
-
-        // 4. Scelta della classe in base alla tipologia
         $account = null;
+        $coordinate = DistanzeRepository::getCoordinate($data['indirizzo']);
+        if($coordinate == null){
+            UIMessage::setError(REGISTRATION_FAILED_ADDRESS);
+            return false;
+        }
         if ($tipo === 'giocatore') {
             $account = new Accountgiocatori();
             $profilo = new Profiligiocatori();
@@ -68,6 +60,8 @@ class UserRegistrationHandler
             $dataAccount['nome'] = $data['nome'];
             $dataAccount['cognome'] = $data['cognome'];
             $dataProfilo['indirizzo'] = $data['indirizzo'];
+            $dataProfilo['latitudine'] = $coordinate['lat'];
+            $dataProfilo['longitudine'] = $coordinate['lng'];
             $dataProfilo['distanzanoninquinanteinmetri'] = $data['distanzamassima'];
         } elseif ($tipo === 'circolo') {
             $account = new Accountcircoli();
@@ -76,6 +70,8 @@ class UserRegistrationHandler
             $dataAccount['password'] = $data['password'];
             $dataAccount['nome'] = $data['nome'];
             $dataProfilo['indirizzo'] = $data['indirizzo'];
+            $dataProfilo['latitudine'] = $coordinate['lat'];
+            $dataProfilo['longitudine'] = $coordinate['lng'];
         } else {
             $this->last_errors[] = "Tipologia di account non valida";
             return false;

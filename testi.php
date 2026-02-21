@@ -8,6 +8,7 @@ define("INVALID_EMAIL_OR_PASSWORD", "Mail o password non valida");
 
 define("REGISTRATION_SUCCESS", "La registrazione è andata a buon fine!");
 define("REGISTRATION_FAILED", "La registrazione non è andata a buon fine!");
+define("REGISTRATION_FAILED_ADDRESS", "Indirizzo non valido");
 define("LOGIN_SUCCESS", "Bentornato!");
 define("LOGOUT_MESSAGE", "Arrivederci!");
 

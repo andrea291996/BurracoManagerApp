@@ -16,10 +16,18 @@ ottieni circoli iscritti al torneo per torneo Id
 class TorneoService{
 
     protected $torneoRepository;
+    protected $squadraRepository;
+    protected $utentiRepository;
+    protected $calendarioRepository;
+    protected $distanzeRepository;
 
     public function __construct()
     {
         $this->torneoRepository = new TorneoRepository();
+        $this->squadraRepository = new SquadraRepository();
+        $this->utentiRepository = new UtentiRepository();
+        $this->calendarioRepository = new CalendarioRepository();
+        $this->distanzeRepository = new DistanzeRepository();
     }
 
     public function ottieniTornei($user, $miei = false): array{
@@ -116,6 +124,17 @@ class TorneoService{
     }
 
     public function chiudiIscrizioni($idTorneo){
-        return $this->torneoRepository->chiudiIscrizioni($idTorneo);
+        $risultato = $this->torneoRepository->chiudiIscrizioni($idTorneo);
+        if($risultato){
+            $squadre = $this->squadraRepository->dammiSquadrePerTorneo($idTorneo);
+            $circoli = $this->utentiRepository->dammiCircoliIscrittiTorneo($idTorneo);
+            $distanze = $this->distanzeRepository->dammiDistanzeSquadreCircoli($squadre, $circoli);
+            $giornate = GIORNATE;
+            
+            $calendario = Algoritmo::generaCalendario($squadre, $circoli, $giornate, $distanze);
+            return $risultato;
+        }
+        
+
     }
 }

@@ -2,7 +2,7 @@
 
 /* 
 *  ClassName: Profilicircoli
-*  Generated: 2026-02-18 09:22:22
+*  Generated: 2026-02-21 22:20:48
 *  Author: Andrea Carminati (default)
 *  Table: profilicircoli
 *  Database: burraco
@@ -15,6 +15,8 @@ class Profilicircoli extends DBObject
 	protected $idprofilocircolo;
 	protected $idaccountcircolo;
 	protected $indirizzo;
+	protected $latitudine;
+	protected $longitudine;
 
 	// Class Constructor
 	public function __construct() {
@@ -35,6 +37,14 @@ class Profilicircoli extends DBObject
 		return $this->indirizzo;
 	}
 
+	function getlatitudine(){
+		return $this->latitudine;
+	}
+
+	function getlongitudine(){
+		return $this->longitudine;
+	}
+
 
 	//Setter methods
 	function setidprofilocircolo($value){
@@ -47,6 +57,14 @@ class Profilicircoli extends DBObject
 
 	function setindirizzo($value){
 		$this->indirizzo=$value;
+	}
+
+	function setlatitudine($value){
+		$this->latitudine=$value;
+	}
+
+	function setlongitudine($value){
+		$this->longitudine=$value;
 	}
 
 }

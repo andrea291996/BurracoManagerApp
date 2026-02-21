@@ -2,7 +2,7 @@
 
 /* 
 *  ClassName: Profiligiocatori
-*  Generated: 2026-02-18 09:22:30
+*  Generated: 2026-02-21 22:20:55
 *  Author: Andrea Carminati (default)
 *  Table: profiligiocatori
 *  Database: burraco
@@ -16,6 +16,8 @@ class Profiligiocatori extends DBObject
 	protected $idaccountgiocatore;
 	protected $indirizzo;
 	protected $distanzanoninquinanteinmetri;
+	protected $latitudine;
+	protected $longitudine;
 
 	// Class Constructor
 	public function __construct() {
@@ -40,6 +42,14 @@ class Profiligiocatori extends DBObject
 		return $this->distanzanoninquinanteinmetri;
 	}
 
+	function getlatitudine(){
+		return $this->latitudine;
+	}
+
+	function getlongitudine(){
+		return $this->longitudine;
+	}
+
 
 	//Setter methods
 	function setidprofilogiocatore($value){
@@ -56,6 +66,14 @@ class Profiligiocatori extends DBObject
 
 	function setdistanzanoninquinanteinmetri($value){
 		$this->distanzanoninquinanteinmetri=$value;
+	}
+
+	function setlatitudine($value){
+		$this->latitudine=$value;
+	}
+
+	function setlongitudine($value){
+		$this->longitudine=$value;
 	}
 
 }

@@ -7,4 +7,4 @@ define("TENGINE_TEMPLATE_FILE_EXTENSION",".mst");
 
 define("BASE_PATH", "/BurracoApp2");
 
-
+define("GIORNATE", [1,2]);
