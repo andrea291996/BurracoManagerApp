@@ -1,5 +1,21 @@
-<footer class="bg-dark text-light py-3 position-fixed bottom-0 w-100">
-  <div class="container text-center small">
-    (: Andrea Carminati :)
-  </div>
+
+
+<footer class="nb-footer">
+    <div class="sq-container">
+        <div class="nb-footer-content">
+            <div class="nb-footer-signature">
+                (: Andrea Carminati :)
+            </div>
+            
+            <div class="nb-footer-tag">
+                Burraco Platform v3.0
+            </div>
+        </div>
+        
+        <div class="nb-footer-bottom">
+            <p style="font-size: 0.55rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; color: #000;">
+                &copy; 2026 — No Compromise, Only Game.
+            </p>
+        </div>
+    </div>
 </footer>

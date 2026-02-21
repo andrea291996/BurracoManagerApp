@@ -62,7 +62,7 @@ class MenuFooterMiddleware {
     }
 
         return [
-            'brand' => ['href' => "./", 'title' => "Mio sito"],
+            'brand' => ['href' => "./", 'title' => "BURRACO MANAGER APP"],
             'items' => $items
         ];
     }

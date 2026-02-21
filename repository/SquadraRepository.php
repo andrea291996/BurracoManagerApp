@@ -12,6 +12,9 @@ Dammi compagno di squadra per userId e torneoId
 Dammi miei mittenti richiestasquadra per torneoId e userId
 Dammi miei destinatari richiestasquadra per torneoId e userId
 Ha una squadra? per torneoId useriId
+Annulla richiesta inviata
+Accetta richiesta ricevuta (formazione squadra)
+Rifiuta richiesta ricevuta
 
 */
 

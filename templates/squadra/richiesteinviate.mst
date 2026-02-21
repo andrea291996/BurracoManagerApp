@@ -1,35 +1,4 @@
-<style>
-    /* STILE SQUADRA - BRUTALIST STYLE */
-.sq-section { padding: 60px 0; border-bottom: 4px solid #000; }
-.sq-container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
 
-.sq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
-
-.sq-title { font-size: 3.5rem; text-transform: uppercase; font-weight: 900; letter-spacing: -2px; line-height: 0.9; margin-bottom: 10px; }
-.sq-subtitle { font-size: 0.8rem; text-transform: uppercase; font-weight: 800; letter-spacing: 3px; color: #666; display: block; margin-bottom: 30px; }
-
-.sq-card { border: 4px solid #000; padding: 30px; transition: transform 0.2s; background: #fff; position: relative; }
-.sq-card:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0px #000; }
-
-.sq-name { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 20px; line-height: 1; }
-
-/* BOTTONI */
-.sq-btn { 
-    display: inline-block; width: 100%; padding: 15px; border: 3px solid #000; 
-    text-transform: uppercase; font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; 
-    cursor: pointer; transition: 0.2s; text-align: center; text-decoration: none; margin-top: 10px;
-}
-.sq-btn-black { background: #000; color: #fff; }
-.sq-btn-black:hover { background: #fff; color: #000; }
-
-.sq-btn-white { background: #fff; color: #000; }
-.sq-btn-white:hover { background: #000; color: #fff; }
-
-.sq-btn-danger { color: #ff0000; border-color: #ff0000; }
-.sq-btn-danger:hover { background: #ff0000; color: #fff; }
-
-.sq-empty { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; color: #ccc; padding: 40px 0; }
-</style>
 
 <section class="sq-section">
     <div class="sq-container">
@@ -43,7 +12,7 @@
                 
                 <form method="POST" action="annulla-richiesta">
                     <input type="hidden" name="idrichiesta" value="{{idrichiesta}}">
-                    <button type="submit" class="sq-btn sq-btn-danger">Annulla Richiesta</button>
+                    <button type="submit" class="sq-btn sq-btn-black">Annulla Richiesta</button>
                 </form>
             </div>
             {{/richiesteinviate}}
