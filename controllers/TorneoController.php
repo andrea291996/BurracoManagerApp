@@ -83,6 +83,23 @@ class TorneoController extends Controller{
         }
     }
 
+    function mostraCircoliIscrittiTorneo(Request $request, Response $response, $args){
+        $page = PageConfigurator::instance()->getPage(); 
+        $page->setTitle("Giocatori Senza Squadra");
+        $user = $request->getAttribute('user');
+        $idTorneo = $request->getQueryParams();
+        $idTorneo = $idTorneo['idtorneo'];
+        if($user->isAmministratore()){
+            $circoli = $this->utentiService->ottieniCircoliIscrittiTorneo($idTorneo);
+            $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => 'tornei', 'titolo' => "Circoli iscritti"]));
+            $page->add("content", new IscrittiView("tornei/circolo", ['circolo'=> $circoli]));
+            return $response;
+        }else{
+            UIMessage::setError(UNAUTHORIZED_OPERATION);
+            return $response->withHeader("Location", "tornei")->withStatus(302);
+        }
+    }
+
     //AZIONI
 
     //POST

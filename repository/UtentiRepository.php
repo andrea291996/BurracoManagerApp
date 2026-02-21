@@ -75,16 +75,15 @@ class UtentiRepository{
     }
 
     public function dammiCircoliIscrittiTorneo($torneoId): array{
-        $idCircoliIscrittiGrezzi = $this->database->select("circolotorneo", [],['idtorneo' => $torneoId]);
-        $circoliIscrittiGrezzi = [];
+        $circoliIscrittiGrezzi = $this->database->select("circolotorneo", [],['idtorneo' => $torneoId]);
         if(!empty($circoliIscrittiGrezzi)){
-            foreach($idCircoliIscrittiGrezzi as $elemento){
+            foreach($circoliIscrittiGrezzi as $elemento){
                 $circoloIscritto = new Accountcircoli();
                 $circoloIscritto->select(['idcircolo'=>$elemento['idcircolo']]);
                 $circoloIscritto->setpassword(null);
-                $circoliIscrittiGrezzi[] = $circoloIscritto;
+                $circoliIscritti[] = $circoloIscritto;
             }
-            return $circoliIscrittiGrezzi;
+            return $circoliIscritti;
         }
         return [];
     }

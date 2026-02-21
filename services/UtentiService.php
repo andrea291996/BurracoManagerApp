@@ -31,6 +31,17 @@ class UtentiService{
         return $data;
     }
 
+    public function ottieniCircoliIscrittiTorneo($idTorneo){
+        $iscritti = $this->utentiRepository->dammiCircoliIscrittiTorneo($idTorneo);
+        $data = [];
+        foreach($iscritti as $iscritto){
+            $data[] = [
+                'nome' => $iscritto->getnome(),
+            ];
+        }
+        return $data;
+    }
+
     public function ottieniGiocatoriSenzaSquadra($idTorneo){
         $giocatori = $this->squadraRepository->dammiGiocatoriSenzaSquadra($idTorneo);
         $data = [];

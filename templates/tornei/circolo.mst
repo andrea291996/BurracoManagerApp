@@ -2,23 +2,23 @@
     <div class="sq-container">
         
         <div class="sq-grid">
-            {{#giocatore}}
+            {{#circolo}}
             <div class="sq-card">
                 <div class="sq-name">
-                    {{nome}} {{cognome}}
+                    {{nome}} 
                     <br>
                 </div>
                 
                 <div class="nb-divider" style="margin: 20px 0;"></div>
                 
             </div>
-            {{/giocatore}}
+            {{/circolo}}
 
-            {{^giocatore}}
+            {{^circolo}}
             <div class="sq-empty">
-                <p>Nessun giocatore.</p>
+                <p>Nessun circolo.</p>
             </div>
-            {{/giocatore}}
+            {{/circolo}}
         </div>
 
     </div>

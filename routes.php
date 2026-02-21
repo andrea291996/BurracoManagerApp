@@ -51,6 +51,10 @@ $routes['GET'] = [
         'pattern' => '/giocatoriiscrittitorneo',
         'callable' => 'TorneoController:mostraGiocatoriIscrittiTorneo'
     ],
+    [
+        'pattern' => '/circoliiscrittitorneo',
+        'callable' => 'TorneoController:mostraCircoliIscrittiTorneo'
+    ],
     //GIOCATORI 
     [
         'pattern' => '/giocatorisenzasquadra',

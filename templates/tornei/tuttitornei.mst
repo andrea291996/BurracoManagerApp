@@ -81,12 +81,15 @@
                     {{#utenti_iscritti_ma_single}}
                     <form method="GET" action="giocatorisenzasquadra">
                         <input type="hidden" name="idtorneo" value="{{id_torneo}}">
-                    <button class="btn-admin">Giocatori senza squadra</button>
+                        <button class="btn-admin">Giocatori senza squadra</button>
                     </form>
                     {{/utenti_iscritti_ma_single}}
 
                     {{#circoli_iscritti}}
-                    <button class="btn-admin">Circoli</button>
+                    <form method="GET" action="circoliiscrittitorneo">
+                        <input type="hidden" name="idtorneo" value="{{id_torneo}}">
+                        <button class="btn-admin">Circoli</button>
+                    </form>
                     {{/circoli_iscritti}}
                 </div>
             </div>
