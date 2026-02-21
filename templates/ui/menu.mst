@@ -10,26 +10,19 @@
     <ul class="nb-menu-list">
         {{#items}}
             <li class="nb-menu-item" style="{{#isRight}}margin-left: auto;{{/isRight}}">
-                
                 {{#hasChilds}}
-                    <div class="nb-dropdown-toggle" 
-                         onmouseover="this.style.background='#000'; this.style.color='#fff'; this.nextElementSibling.style.display='block';" 
-                         onmouseout="this.style.background='none'; this.style.color='#000'; this.nextElementSibling.style.display='none';">
+                    <div class="nb-dropdown-toggle">
                         {{title}} <span style="margin-left: 8px; font-size: 0.6rem;">▼</span>
                     </div>
                     
-                    <ul class="nb-dropdown-menu" 
-                        onmouseover="this.style.display='block';" 
-                        onmouseout="this.style.display='none';">
+                    <ul class="nb-dropdown-menu">
                         {{#childs}}
                             {{#isDivider}}
                                 <hr class="nb-divider">
                             {{/isDivider}}
                             {{^isDivider}}
                                 <li class="nb-dropdown-item">
-                                    <a href="{{href}}" class="nb-dropdown-link"
-                                       onmouseover="this.style.background='#000'; this.style.color='#fff';" 
-                                       onmouseout="this.style.background='none'; this.style.color='#000';">
+                                    <a href="{{href}}" class="nb-dropdown-link">
                                         {{title}}
                                     </a>
                                 </li>
@@ -39,13 +32,10 @@
                 {{/hasChilds}}
                 
                 {{^hasChilds}}
-                    <a href="{{href}}" class="nb-nav-link"
-                       onmouseover="this.style.background='#000'; this.style.color='#fff';" 
-                       onmouseout="this.style.background='none'; this.style.color='#000';">
+                    <a href="{{href}}" class="nb-nav-link">
                         {{title}}
                     </a>
                 {{/hasChilds}}
-
             </li>
         {{/items}}
     </ul>

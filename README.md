@@ -82,10 +82,8 @@ Slim viene utilizzato per il routing HTTP e la gestione middleware (sessioni, au
 
 ### Creazione Torneo (Admin)
 - Inserimento parametri torneo:
-  - Data
-  - Tipologia
+  - Nome
   - Stato iniziale
-  - Circoli coinvolti
 
 ### ▶ Avvio Torneo
 - Cambio stato torneo da parte dell’amministratore
