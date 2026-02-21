@@ -46,6 +46,28 @@ class SquadraService{
         }
     }
 
+    public function ottieniTutteSquadre($idTorneo): array{
+        $squadre = $this->squadraRepository->dammiSquadrePerTorneo($idTorneo);
+        $data = [];
+        foreach($squadre as $squadra){
+            $idGiocatoreMittente = $squadra->getidcompagnomittente();
+            $giocatoreMittente = $this->utentiRepository->dammiGiocatore($idGiocatoreMittente);
+            $idGiocatoreDestinatario = $squadra->getidcompagnodestinatario();
+            $giocatoreDestinatario = $this->utentiRepository->dammiGiocatore($idGiocatoreDestinatario);
+            $data[] = [
+                'giocatoremittente' => [
+                    'nome'=>$giocatoreMittente->getnome(),
+                    'cognome' =>$giocatoreMittente->getcognome()
+                ],
+                'giocatoredestinatario' => [
+                    'nome'=>$giocatoreDestinatario->getnome(),
+                    'cognome'=>$giocatoreDestinatario->getcognome()
+                ]
+            ];
+        }
+        return $data;
+    }
+
     public function ottieniRichiesteRicevute($user, $torneoId): array{
         $data = [];
         if($user->isGiocatore()){

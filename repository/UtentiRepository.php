@@ -88,4 +88,11 @@ class UtentiRepository{
         }
         return [];
     }
+
+    public function dammiGiocatore($giocatoreId): Accountgiocatori | bool{
+        $giocatore = new Accountgiocatori();
+        $giocatore->select(['idgiocatore' => $giocatoreId]);
+        $giocatore->setpassword(null);
+        return $giocatore;
+    }
 }

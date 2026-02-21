@@ -135,9 +135,18 @@ body {
 /* ==========================================================================
    5. BOTTONI & AZIONI
    ========================================================================== */
-.btn-group { margin-bottom: 45px; display: flex; flex-wrap: wrap; gap: 20px; }
+.btn-group { margin-bottom: 45px; display: inline-block; margin: 0; flex-wrap: wrap; gap: 20px; }
 .section-label { font-size: 0.75rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; color: #000; display: block; }
-
+.admin-btn-group form, 
+.btn-group form {
+    display: inline-block;
+    margin: 0;
+}
+.admin-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Spazio uniforme tra i bottoni */
+}
 /* Back */
 .btn-back { 
     display: inline-block; padding: 12px 20px; background: #fff; color: #000; border: 3px solid #000; 

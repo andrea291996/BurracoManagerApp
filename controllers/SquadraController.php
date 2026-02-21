@@ -19,7 +19,7 @@ class SquadraController extends Controller{
         $idTorneo = $idTorneo['idtorneo'];
         $referer = $request->getHeaderLine('Referer');
         $backUrl = (strpos($referer, 'mieitornei') !== false) ? 'mieitornei' : 'tornei';
-        $page->add("content", new HeaderView("ui/titoloeindietro.mst", ['backUrl' => $backUrl, 'titolo' => "la mia squadra"]));
+        $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => $backUrl, 'titolo' => "la mia squadra"]));
         if($this->squadraService->HaSquadra($user, $idTorneo)){
             $compagno = $this->squadraService->ottieniSquadra($user, $idTorneo);
             $page->add("content", new SquadreView("squadra/compagnosquadra", ['compagno'=>$compagno]));
@@ -32,6 +32,23 @@ class SquadraController extends Controller{
         $giocatoriSingle = $this->squadraService->ottieniGiocatoriSingleNonMieiMittentiENonMieiDestinatari($user, $idTorneo);
         $page->add("content", new SquadreView("squadra/giocatorisingle", ['giocatorisingle'=>$giocatoriSingle]));
         return $response;
+    }
+
+    public function mostraTutteSquadre(Request $request, Response $response, $args){
+        $page = PageConfigurator::instance()->getPage(); 
+        $page->setTitle("Tutte le squadre");
+        $user = $request->getAttribute('user');
+        $idTorneo = $request->getQueryParams();
+        $idTorneo = $idTorneo['idtorneo'];
+        if($user->isAmministratore()){
+            $squadre = $this->squadraService->ottieniTutteSquadre($idTorneo);
+            $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => 'tornei', 'titolo' => "tutte le squadre"]));
+            $page->add("content", new SquadreView("squadra/tuttesquadre", ['backUrl' => 'tornei', 'titolo' => "tutte le squadre", 'squadre'=> $squadre]));
+            return $response;
+        }else{
+            UIMessage::setError(UNAUTHORIZED_OPERATION);
+            return $response->withHeader("Location", "tornei")->withStatus(302);
+        }
     }
 
     //AZIONI

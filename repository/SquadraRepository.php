@@ -59,6 +59,7 @@ class SquadraRepository{
         return [];
     }
 
+
     public function dammiSquadra($userId, $torneoId): Squadre | null{
         if(!$this->HaSquadra($userId, $torneoId)){
             return null;

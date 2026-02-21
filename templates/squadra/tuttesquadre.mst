@@ -1,0 +1,33 @@
+<div class="sq-section">
+    <div class="sq-container">
+        
+        
+
+        <div class="sq-grid">
+            {{#squadre}}
+            <div class="sq-card">
+                <div class="sq-name">
+                    {{giocatoremittente.nome}} {{giocatoremittente.cognome}}
+                    <br>
+                    <span style="color: #666; font-size: 1.2rem;">&</span>
+                    <br>
+                    {{giocatoredestinatario.nome}} {{giocatoredestinatario.cognome}}
+                </div>
+                
+                <div class="nb-divider" style="margin: 20px 0;"></div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="status-badge" style="background: #000; color: #fff; border: none;">Squadra Confermata</span>
+                </div>
+            </div>
+            {{/squadre}}
+
+            {{^squadre}}
+            <div class="sq-empty">
+                <p>Nessuna squadra iscritta a questo torneo.</p>
+            </div>
+            {{/squadre}}
+        </div>
+
+    </div>
+</div>
