@@ -1,3 +1,5 @@
+
+
 <section class="sq-section">
     <div class="sq-container">
         <h2 class="sq-title">Richieste<br>Ricevute</h2>
@@ -9,12 +11,14 @@
                 <div class="sq-name">{{nomemittente}}<br>{{cognomemittente}}</div>
                 
                 <div class="sq-actions">
-                    <form method="POST" action="accetta-richiesta">
+                    <form method="POST" action="accettarichiesta">
+                        <input type="hidden" name="idtorneo" value="{{idtorneo}}">
                         <input type="hidden" name="idrichiesta" value="{{idrichiesta}}">
                         <button type="submit" class="sq-btn sq-btn-black">Accetta</button>
                     </form>
 
-                    <form method="POST" action="rifiuta-richiesta">
+                    <form method="POST" action="rifiutarichiesta">
+                        <input type="hidden" name="idtorneo" value="{{idtorneo}}">
                         <input type="hidden" name="idrichiesta" value="{{idrichiesta}}">
                         <button type="submit" class="sq-btn sq-btn-white">Rifiuta</button>
                     </form>

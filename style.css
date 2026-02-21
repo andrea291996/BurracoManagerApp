@@ -217,3 +217,19 @@ body {
     .nb-row { grid-template-columns: 1fr; gap: 40px; }
     .statement-text { font-size: 2rem; }
 }
+
+/* ==========================================================================
+   9. HEADER E TORNA INDIETRO
+   ========================================================================== */
+.page-header {
+    width: 100%;
+    max-width: 1200px; /* O la larghezza massima che usi nel sito */
+    margin: 40px auto 20px auto;
+    padding: 0 20px;   /* Garantisce che non tocchi i bordi su mobile */
+    box-sizing: border-box;
+}
+
+.page-header .main-title {
+    margin-top: 20px;
+    /* Qui puoi aggiungere altri stili per rendere il titolo unico */
+}

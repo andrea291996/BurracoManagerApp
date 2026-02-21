@@ -18,10 +18,12 @@ IscriviGiocatore per torneoId e userId
 
 class TorneoRepository{
     protected $database;
+    protected $squadraRepository;
 
     public function __construct()
     {
         $this->database = Database::instance();
+        $this->squadraRepository = new SquadraRepository();
     }
 
     public function dammiStatoTorneo($torneoId): null | string{
@@ -115,6 +117,13 @@ class TorneoRepository{
         }
         $giocatoreTorneo = new Giocatoretorneo();
         $giocatoreTorneo->select(['idgiocatore' => $userId, 'idtorneo' => $torneoId]);
+        //devo cancellare la squadra se c'è
+        //annullare le richieste pendenti
+        if($this->squadraRepository->HaSquadra($userId, $torneoId)){
+            $squadra = $this->squadraRepository->dammiSquadra($userId, $torneoId);
+            $squadra->delete();
+        }
+        $this->squadraRepository->chiudiRichiestePendenti($userId, $torneoId);
         return (bool)$giocatoreTorneo->delete();
     }
 

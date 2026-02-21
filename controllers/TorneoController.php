@@ -20,6 +20,7 @@ class TorneoController extends Controller{
         $risultato = $this->torneoService->ottieniTornei($user);
         $data = $risultato['data'];
         $template = $risultato['template'];
+        $page->add("content", new HeaderView("ui/titoloeindietro.mst", ['backUrl' => "./", 'titolo' => "Tornei"]));
         $page->add("content", new TorneiView($template, ['data'=>$data]));
         return $response;
     }
@@ -28,10 +29,10 @@ class TorneoController extends Controller{
         $page = PageConfigurator::instance()->getPage(); 
         $page->setTitle("Miei Tornei");
         $user = $request->getAttribute('user');
-        
         $risultato = $this->torneoService->ottieniTornei($user, true);
         $data = $risultato['data'];
         $template = $risultato['template'];
+        $page->add("content", new HeaderView("ui/titoloeindietro.mst", ['backUrl' => "./", 'titolo' => "miei tornei"]));
         $page->add("content", new TorneiView($template, ['data'=>$data, 'miei' => true]));
         return $response;
     }
@@ -39,6 +40,7 @@ class TorneoController extends Controller{
     //AZIONI
 
     //POST
+    
     public function iscrivi(Request $request, Response $response, $args){
         $user = $request->getAttribute('user');
         $data = $request->getParsedBody();
@@ -67,6 +69,7 @@ class TorneoController extends Controller{
         }
         return $response->withHeader("Location", "./tornei")->withStatus(301);
     }
+
 
     /*
     function infoTorneo(Request $request, Response $response, $args){

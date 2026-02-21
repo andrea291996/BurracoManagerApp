@@ -10,8 +10,9 @@
             <div class="sq-card" style="border-style: dashed;">
                 <div class="sq-name" style="color: #888;">{{nomedestinatario}}<br>{{cognomedestinatario}}</div>
                 
-                <form method="POST" action="annulla-richiesta">
+                <form method="POST" action="annullarichiesta">
                     <input type="hidden" name="idrichiesta" value="{{idrichiesta}}">
+                    <input type="hidden" name="idtorneo" value="{{idtorneo}}">
                     <button type="submit" class="sq-btn sq-btn-black">Annulla Richiesta</button>
                 </form>
             </div>

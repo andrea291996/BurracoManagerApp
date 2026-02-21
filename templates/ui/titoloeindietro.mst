@@ -1,0 +1,11 @@
+<header class="page-header">
+    <div class="back-link-container">
+        <a href="{{backUrl}}" class="btn-back">
+            ← Torna Indietro
+        </a>
+    </div>
+
+    <h1 class="main-title">
+        {{titolo}}
+    </h1>
+</header>

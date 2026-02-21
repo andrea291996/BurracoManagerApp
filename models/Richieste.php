@@ -2,7 +2,7 @@
 
 /* 
 *  ClassName: Richieste
-*  Generated: 2026-02-20 10:43:52
+*  Generated: 2026-02-21 08:28:00
 *  Author: Andrea Carminati (default)
 *  Table: richieste
 *  Database: burraco

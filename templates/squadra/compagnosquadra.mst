@@ -1,0 +1,30 @@
+<section class="sq-section">
+    <div class="sq-container">
+      
+        <div class="torneo-card">
+            <div class="card-header">
+                <h2>DETTAGLI COPPIA</h2>
+                <span class="status-badge">ISCRITTO</span>
+            </div>
+            
+            <div class="card-body">
+                <div class="nb-row">
+                    <div class="sq-card">
+                        <p class="sq-name">Pronto a giocare? Concentrati.</p>
+                    </div>
+
+                    {{#compagno}}
+                    <div class="sq-card sq-card-dark">
+                        <span class="sq-subtitle">PArtner</span>
+                        <h3 class="sq-name">{{nome}} {{cognome}}</h3>
+                        
+                        
+                    </div>
+                    {{/compagno}}
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</section>

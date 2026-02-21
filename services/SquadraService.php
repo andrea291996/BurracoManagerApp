@@ -28,19 +28,37 @@ class SquadraService{
         $this->utentiRepository = new UtentiRepository();
     }
 
+    public function HaSquadra($user, $torneoId){
+        return $this->squadraRepository->HaSquadra($user->getidgiocatore(), $torneoId);
+    }
+
+    public function ottieniSquadra($user, $torneoId): array{
+        if($user->isGiocatore() && $this->squadraRepository->HaSquadra($user->getidgiocatore(), $torneoId)){
+                $compagno = $this->squadraRepository->dammiCompagnoSquadra($user->getidgiocatore(), $torneoId);
+                $data[] = [
+                    'idcompagno' => $compagno->getidgiocatore(),
+                    'nome'       => $compagno->getnome(),
+                    'cognome'    => $compagno->getcognome()
+                ];
+            return $data;
+        }else{
+            return [];
+        }
+    }
+
     public function ottieniRichiesteRicevute($user, $torneoId): array{
         $data = [];
         if($user->isGiocatore()){
             $userId = $user->getidgiocatore();
             $richiesteRicevute = $this->squadraRepository->dammiMieiMittenti($userId, $torneoId);
-            //var_dump($richiesteRicevute);exit;
             foreach($richiesteRicevute as $item) {
                 $mittente = $item['mittente'];
                 $data[] = [
                     'idrichiesta'     => $item['idrichiesta'],
                     'idmittente'      => $mittente->getidgiocatore(),
                     'nomemittente'    => $mittente->getnome(),
-                    'cognomemittente' => $mittente->getcognome()
+                    'cognomemittente' => $mittente->getcognome(),
+                    'idtorneo'        => $torneoId
                 ];
             }
         }
@@ -55,10 +73,11 @@ class SquadraService{
             foreach($richiesteInviate as $item) {
                 $destinatario = $item['destinatario'];
                 $data[] = [
-                    'idrichiesta'     => $item['idrichiesta'],
-                    'iddestinatrio'      => $destinatario->getidgiocatore(),
+                    'idrichiesta'         => $item['idrichiesta'],
+                    'iddestinatrio'       => $destinatario->getidgiocatore(),
                     'nomedestinatario'    => $destinatario->getnome(),
-                    'cognomedestinatario' => $destinatario->getcognome()
+                    'cognomedestinatario' => $destinatario->getcognome(),
+                    'idtorneo'            => $torneoId
                 ];
             }
         }
@@ -66,7 +85,7 @@ class SquadraService{
         }
 
         public function ottieniGiocatoriSingleNonMieiMittentiENonMieiDestinatari($user, $torneoId){
-            $risultato = [];
+            $data = [];
             if($user->isGiocatore()){
                 $userId = $user->getidgiocatore();
                 $richiesteInviate = $this->squadraRepository->dammiMieiDestinatari($userId, $torneoId);
@@ -81,21 +100,40 @@ class SquadraService{
                     $idEsclusi[] = $item['mittente']->getidgiocatore();
                 }
                 foreach($giocatoriIscritti as $giocatore){
-                    if(!in_array($giocatore->getidgiocatore(), $idEsclusi)){
+                    if(!in_array($giocatore->getidgiocatore(), $idEsclusi) && !$this->squadraRepository->HaSquadra($giocatore->getidgiocatore(), $torneoId)){
                         $giocatoriSingle[] = $giocatore;
                     }
                 }
                 foreach($giocatoriSingle as $giocatore){
-                    $risultato[] = [
+                    $data[] = [
                     'idgiocatore' => $giocatore->getidgiocatore(),
-                    'nome' => $giocatore->getnome(),
-                    'cognome' => $giocatore->getcognome()
+                    'nome'        => $giocatore->getnome(),
+                    'cognome'     => $giocatore->getcognome(),
+                    'idtorneo'    => $torneoId
                     ];
                 }
             }
-            return $risultato;
+            return $data;
         }
        
+        //POST
+
+        public function inviaRichiesta($idTorneo, $idMittente, $idDestinatario): bool{
+            return $this->squadraRepository->inserisciRichiesta($idTorneo, $idMittente, $idDestinatario);
+        }
+
+        public function annullaRichiesta($idRichiesta): bool{
+            return $this->squadraRepository->annullaRichiesta($idRichiesta);
+        }
+
+        public function rifiutaRichiesta($idRichiesta): bool{
+            return $this->squadraRepository->rifiutaRichiesta($idRichiesta);
+        }
+
+        public function accettaRichiesta($idRichiesta): bool{
+            return $this->squadraRepository->accettaRichiesta($idRichiesta);
+        }
+
     }
     /*
     public function ottieniDatiMiaSquadra($userId, $torneoId) {

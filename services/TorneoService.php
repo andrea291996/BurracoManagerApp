@@ -71,18 +71,18 @@ class TorneoService{
                 'stato_torneo' => $torneo->getstatotorneo(),
                 'pulsante_info' => true,
                 'la_mia_squadra' => $tipologiaUtente == "giocatore" && $isIscritto,
-                'calendario' => $stato == "in corso",
-                'classifica' => $stato == "concluso",
+                'calendario' => $stato == STATUS_TOURNAMENT_ONGOING,
+                'classifica' => $stato == STATUS_TOURNAMENT_CLOSED,
                 'isGiocatoreOCircoloIscritto' =>
-                 ($stato == "aperto" && !$isIscritto && ($tipologiaUtente == "giocatore" || $tipologiaUtente == "circolo")) || 
-                 ($stato == "aperto" && $isIscritto && ($tipologiaUtente == "giocatore" || $tipologiaUtente == "circolo")) || 
+                 ($stato == STATUS_TOURNAMENT_OPEN && !$isIscritto && ($tipologiaUtente == "giocatore" || $tipologiaUtente == "circolo")) || 
+                 ($stato == STATUS_TOURNAMENT_OPEN && $isIscritto && ($tipologiaUtente == "giocatore" || $tipologiaUtente == "circolo")) || 
                  ($tipologiaUtente == "giocatore" && $isIscritto),
-                'iscriviti' => $stato == "aperto" && !$isIscritto && ($tipologiaUtente == "giocatore" || $tipologiaUtente == "circolo"),
-                'disiscriviti' => $stato == "aperto" && $isIscritto && ($tipologiaUtente == "giocatore" || $tipologiaUtente == "circolo"),
-                'chiudi_iscrizioni' => $stato == "aperto" && $tipologiaUtente == "amministratore",
+                'iscriviti' => $stato == STATUS_TOURNAMENT_OPEN && !$isIscritto && ($tipologiaUtente == "giocatore" || $tipologiaUtente == "circolo"),
+                'disiscriviti' => $stato == STATUS_TOURNAMENT_OPEN && $isIscritto && ($tipologiaUtente == "giocatore" || $tipologiaUtente == "circolo"),
+                'chiudi_iscrizioni' => $stato == STATUS_TOURNAMENT_OPEN && $tipologiaUtente == "amministratore",
                 'tutte_squadre' => $tipologiaUtente == "amministratore",
                 'utenti_iscritti' => $tipologiaUtente == "amministratore",
-                'utenti_iscritti_ma_single' => $tipologiaUtente == "amministratore" && $stato == "aperto",
+                'utenti_iscritti_ma_single' => $tipologiaUtente == "amministratore" && $stato == STATUS_TOURNAMENT_OPEN,
                 'circoli_iscritti' => $tipologiaUtente == "amministratore",
                 'isAmministratore' => $tipologiaUtente == "amministratore"
             ];

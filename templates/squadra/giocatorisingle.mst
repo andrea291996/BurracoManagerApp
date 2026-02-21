@@ -9,8 +9,9 @@
             <div class="sq-card">
                 <div class="sq-name">{{nome}}<br>{{cognome}}</div>
                 
-                <form method="POST" action="invia-richiesta">
+                <form method="POST" action="inviarichiesta">
                     <input type="hidden" name="iddestinatario" value="{{idgiocatore}}">
+                    <input type="hidden" name="idtorneo" value="{{idtorneo}}">
                     <button type="submit" class="sq-btn sq-btn-black">Invia Richiesta</button>
                 </form>
             </div>

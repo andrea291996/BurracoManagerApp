@@ -76,8 +76,24 @@ $routes['POST'] = [
     [
         'pattern' => '/disiscrivi',
         'callable' => 'TorneoController:disiscrivi'
+    ],
+    //RICHIESTA SQUADRA
+    [
+        'pattern' => '/inviarichiesta',
+        'callable' => 'SquadraController:inviaRichiesta'
+    ],
+    [
+        'pattern' => '/annullarichiesta',
+        'callable' => 'SquadraController:annullaRichiesta'
+    ],
+    [
+        'pattern' => '/accettarichiesta',
+        'callable' => 'SquadraController:accettaRichiesta'
+    ],
+    [
+        'pattern' => '/rifiutarichiesta',
+        'callable' => 'SquadraController:rifiutaRichiesta'
     ]
-    
 ];
 
 ?>

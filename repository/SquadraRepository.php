@@ -12,6 +12,7 @@ Dammi compagno di squadra per userId e torneoId
 Dammi miei mittenti richiestasquadra per torneoId e userId
 Dammi miei destinatari richiestasquadra per torneoId e userId
 Ha una squadra? per torneoId useriId
+Inserisci richiesta
 Annulla richiesta inviata
 Accetta richiesta ricevuta (formazione squadra)
 Rifiuta richiesta ricevuta
@@ -42,7 +43,10 @@ class SquadraRepository{
     }
 
     public function dammiSquadrePerTorneo($torneoId): array{
-        $squadreGrezze = $this->database->select(['squadre'],[],['idtorneo' => $torneoId]);
+        $sql = "SELECT * FROM squadre WHERE idtorneo = ? ";
+        $sth = $this->database->prepare($sql);
+        $sth->execute([$torneoId]);
+        $squadreGrezze = $sth->fetchAll();
         $squadre = [];
         if(!empty($squadreGrezze)){
             foreach($squadreGrezze as $elemento){
@@ -56,6 +60,9 @@ class SquadraRepository{
     }
 
     public function dammiSquadra($userId, $torneoId): Squadre | null{
+        if(!$this->HaSquadra($userId, $torneoId)){
+            return null;
+        }
         $squadreGrezze = $this->dammiSquadrePerTorneo($torneoId);
         if(!empty($squadreGrezze)){
             foreach($squadreGrezze as $squadra){
@@ -91,7 +98,7 @@ class SquadraRepository{
     public function dammiMieiMittenti($userId, $torneoId): array{
         $sql = "SELECT * FROM richieste WHERE idtorneo = ? AND iddestinatario = ? AND stato = ?";
         $sth = $this->database->prepare($sql);
-        $sth->execute([$torneoId, $userId, "in attesa"]);
+        $sth->execute([$torneoId, $userId, STATUS_REQUEST_PENDING]);
         $richiesteGrezze = $sth->fetchAll();
         $mittenti = [];
         if(!empty($richiesteGrezze)){
@@ -112,7 +119,7 @@ class SquadraRepository{
     public function dammiMieiDestinatari($userId, $torneoId): array{
         $sql = "SELECT * FROM richieste WHERE idtorneo = ? AND idmittente = ? AND stato = ?";
         $sth = $this->database->prepare($sql);
-        $sth->execute([$torneoId, $userId, "in attesa"]);
+        $sth->execute([$torneoId, $userId, STATUS_REQUEST_PENDING]);
         $richiesteGrezze = $sth->fetchAll();
         $destinatari = [];
         if(!empty($richiesteGrezze)){
@@ -131,13 +138,117 @@ class SquadraRepository{
     }
 
     public function HaSquadra($userId, $torneoId): bool{
-        $squadra = $this->dammiSquadra($userId, $torneoId);
-        if(empty($squadra)){
-            return false;
-        }else{
+        $sql = "SELECT * FROM squadre WHERE idtorneo = ? AND (idcompagnodestinatario = ? OR idcompagnomittente = ?)";
+        $sth = $this->database->prepare($sql);
+        $sth->execute([$torneoId, $userId, $userId]);
+        $risultato = $sth->fetchAll();
+        if(!empty($risultato)){
             return true;
+        }else{
+            return false;
+        }
+        
+    }
+
+    public function inserisciRichiesta($idTorneo, $idMittente, $idDestinatario): bool{
+        $richiesta = new Richieste();
+        $richiesta->setidtorneo($idTorneo);
+        $richiesta->setidmittente($idMittente);
+        $richiesta->setiddestinatario($idDestinatario);
+        $dataInvio = date('Y-m-d H:i:s');
+        $richiesta->setdatainvio($dataInvio);
+        $richiesta->setstato(STATUS_REQUEST_PENDING);
+        $risultato = $richiesta->insert();
+        if($risultato > 0){
+            return true;
+        }else{
+            return false;
         }
     }
+
+    public function annullaRichiesta($idRichiesta){
+        $richiesta = new Richieste();
+        $richiesta->select(['idrichiesta'=>$idRichiesta]);
+        $dataFine = date('Y-m-d H:i:s');
+        $richiesta->setdatafine($dataFine);
+        $richiesta->setstato(STATUS_REQUEST_CANCELLED);
+        $risultato = $richiesta->update();
+        if($risultato > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function rifiutaRichiesta($idRichiesta){
+        $richiesta = new Richieste();
+        $richiesta->select(['idrichiesta'=>$idRichiesta]);
+        $dataFine = date('Y-m-d H:i:s');
+        $richiesta->setdatafine($dataFine);
+        $richiesta->setstato(STATUS_REQUEST_REJECTED);
+        $risultato = $richiesta->update();
+        if($risultato > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function accettaRichiesta($idRichiesta){
+        $richiesta = new Richieste();
+        $richiesta->select(['idrichiesta'=>$idRichiesta]);
+        $dataFine = date('Y-m-d H:i:s');
+        $richiesta->setdatafine($dataFine);
+        $richiesta->setstato(STATUS_REQUEST_ACCEPTED);
+        $risultato = $richiesta->update();
+        if($risultato > 0 && $this->inserisciSquadra($idRichiesta)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function inserisciSquadra($idRichiesta){
+        $richiesta = new Richieste();
+        $richiesta->select(['idrichiesta'=>$idRichiesta]);
+        $idMittente = $richiesta->getidmittente();
+        $idDestinatario = $richiesta->getiddestinatario();
+        $idTorneo = $richiesta->getidtorneo();
+        $statoRichiesta = $richiesta->getstato();
+        //controllo se il torneo è aperto alle iscrizioni
+        $torneo = new Tornei();
+        $torneo->select(['idtorneo' => $idTorneo]);
+        $statoTorneo = $torneo->getstatotorneo();
+        if($statoTorneo == STATUS_TOURNAMENT_OPEN && $statoRichiesta == STATUS_REQUEST_ACCEPTED){
+            $squadra = new Squadre();
+            $squadra->setidtorneo($idTorneo);
+            $squadra->setidcompagnomittente($idMittente);
+            $squadra->setidcompagnodestinatario($idDestinatario);
+            //annullo le altre richieste che avevano i giocatori
+            $this->chiudiRichiestePendenti($idMittente, $idTorneo);
+            $this->chiudiRichiestePendenti($idDestinatario, $idTorneo);
+            return $squadra->insert();
+        }else{
+            return false;
+        }
+    }
+
+    public function chiudiRichiestePendenti($idGiocatore, $idTorneo){
+        $sql = "SELECT * FROM richieste WHERE idtorneo = ? AND stato = ? AND (iddestinatario = ? OR idmittente = ?)";
+        $sth = $this->database->prepare($sql);
+        $sth->execute([$idTorneo, STATUS_REQUEST_PENDING, $idGiocatore, $idGiocatore]);
+        $richiestePendenti = $sth->fetchAll();
+        foreach($richiestePendenti as $r){
+            $richiesta = new Richieste();
+            $richiesta->select(['idrichiesta' => $r['idrichiesta']]);
+            $richiesta->setstato(STATUS_REQUEST_CANCELLED);
+            $dataFine = date('Y-m-d H:i:s');
+            $richiesta->setdatafine($dataFine);
+            $richiesta->update();
+        }
+    }
+
+
 
     //VECCHIE
     /*
