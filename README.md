@@ -70,14 +70,15 @@ Slim viene utilizzato per il routing HTTP e la gestione middleware (sessioni, au
 - Visualizzazione tornei
 - Interfaccia strutturata (Info, Classifica, Calendario in sviluppo)
 
----
-
-## Funzionalità in Sviluppo
-
 ### Formazione Squadre
 - Gestione richieste di squadra tra giocatori
 - Accettazione / rifiuto richieste
 - Creazione entità Squadra collegata al torneo
+
+---
+
+## Funzionalità in Sviluppo
+
 
 ### Creazione Torneo (Admin)
 - Inserimento parametri torneo:
