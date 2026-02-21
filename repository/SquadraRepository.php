@@ -248,6 +248,19 @@ class SquadraRepository{
         }
     }
 
+    public function annullaRichiestaAccettata($idGiocatore, $idTorneo){
+        $sql = "SELECT * FROM richieste WHERE idtorneo = ? AND stato = ? AND (iddestinatario = ? OR idmittente = ?)";
+        $sth = $this->database->prepare($sql);
+        $sth->execute([$idTorneo, STATUS_REQUEST_ACCEPTED, $idGiocatore, $idGiocatore]);
+        $richiestaAccettaGrezza = $sth->fetch();
+        $richiesta = new Richieste();
+        $richiesta->select(['idrichiesta'=>$richiestaAccettaGrezza['idrichiesta']]);
+        $dataFine = date('Y-m-d H:i:s');
+        $richiesta->setdatafine($dataFine);
+        $richiesta->setstato(STATUS_REQUEST_CANCELLED);
+        $richiesta->update();
+    }
+
 
 
     //VECCHIE
