@@ -1,0 +1,25 @@
+<div class="sq-section">
+    <div class="sq-container">
+        
+        <div class="sq-grid">
+            {{#iscritti}}
+            <div class="sq-card">
+                <div class="sq-name">
+                    {{nome}} {{cognome}}
+                    <br>
+                </div>
+                
+                <div class="nb-divider" style="margin: 20px 0;"></div>
+                
+            </div>
+            {{/iscritti}}
+
+            {{^iscritti}}
+            <div class="sq-empty">
+                <p>Nessuna giocatore iscritto a questo torneo.</p>
+            </div>
+            {{/iscritti}}
+        </div>
+
+    </div>
+</div>

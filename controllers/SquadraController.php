@@ -43,7 +43,7 @@ class SquadraController extends Controller{
         if($user->isAmministratore()){
             $squadre = $this->squadraService->ottieniTutteSquadre($idTorneo);
             $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => 'tornei', 'titolo' => "tutte le squadre"]));
-            $page->add("content", new SquadreView("squadra/tuttesquadre", ['backUrl' => 'tornei', 'titolo' => "tutte le squadre", 'squadre'=> $squadre]));
+            $page->add("content", new IscrittiView("squadra/tuttesquadre", ['squadre'=> $squadre]));
             return $response;
         }else{
             UIMessage::setError(UNAUTHORIZED_OPERATION);

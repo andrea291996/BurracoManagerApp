@@ -16,4 +16,16 @@ class UtentiService{
     {
         $this->utentiRepository = new UtentiRepository;
     }
+
+    public function ottieniGiocatoriIscrittiTorneo($idTorneo){
+        $iscritti = $this->utentiRepository->dammiGiocatoriIscrittiTorneo($idTorneo);
+        $data = [];
+        foreach($iscritti as $iscritto){
+            $data[] = [
+                'nome' => $iscritto->getnome(),
+                'cognome'=>$iscritto->getcognome()
+            ];
+        }
+        return $data;
+    }
 }

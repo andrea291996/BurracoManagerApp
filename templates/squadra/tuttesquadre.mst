@@ -1,8 +1,6 @@
 <div class="sq-section">
     <div class="sq-container">
         
-        
-
         <div class="sq-grid">
             {{#squadre}}
             <div class="sq-card">

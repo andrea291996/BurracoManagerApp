@@ -6,10 +6,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 class TorneoController extends Controller{
 
     protected $torneoService;
+    protected $utentiService;
 
     public function __construct()
     {
         $this->torneoService = new TorneoService;
+        $this->utentiService = new UtentiService;
     }
     
     function mostraTuttiTornei(Request $request, Response $response, $args) {    
@@ -19,7 +21,7 @@ class TorneoController extends Controller{
         $risultato = $this->torneoService->ottieniTornei($user);
         $data = $risultato['data'];
         $template = $risultato['template'];
-        $page->add("content", new HeaderView("ui/titoloeindietro.mst", ['backUrl' => "./", 'titolo' => "Tornei", "isAmministratore" => $user->isAmministratore()]));
+        $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => "./", 'titolo' => "Tornei", "isAmministratore" => $user->isAmministratore()]));
         $page->add("content", new TorneiView($template, ['data'=>$data]));
         return $response;
     }
@@ -31,7 +33,7 @@ class TorneoController extends Controller{
         $risultato = $this->torneoService->ottieniTornei($user, true);
         $data = $risultato['data'];
         $template = $risultato['template'];
-        $page->add("content", new HeaderView("ui/titoloeindietro.mst", ['backUrl' => "./", 'titolo' => "miei tornei"]));
+        $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => "./", 'titolo' => "miei tornei"]));
         $page->add("content", new TorneiView($template, ['data'=>$data, 'miei' => true]));
         return $response;
     }
@@ -41,9 +43,26 @@ class TorneoController extends Controller{
         $page->setTitle("Crea Nuovo Torneo");
         $user = $request->getAttribute('user');
         if($user->isAmministratore()){
-            $page->add("content", new HeaderView("ui/titoloeindietro.mst", ['backUrl' => "tornei", 'titolo' => "Crea nuovo torneo"]));
+            $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => "tornei", 'titolo' => "Crea nuovo torneo"]));
             $page->add("content", new TorneiView("tornei/creanuovotorneo.mst"));
             return $response;
+        }
+    }
+
+    function mostraGiocatoriIscrittiTorneo(Request $request, Response $response, $args){
+        $page = PageConfigurator::instance()->getPage(); 
+        $page->setTitle("Giocatori Iscritti");
+        $user = $request->getAttribute('user');
+        $idTorneo = $request->getQueryParams();
+        $idTorneo = $idTorneo['idtorneo'];
+        if($user->isAmministratore()){
+            $iscritti = $this->utentiService->ottieniGiocatoriIscrittiTorneo($idTorneo);
+            $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => 'tornei', 'titolo' => "Giocatori iscritti"]));
+            $page->add("content", new IscrittiView("tornei/tuttiiscritti", ['iscritti'=> $iscritti]));
+            return $response;
+        }else{
+            UIMessage::setError(UNAUTHORIZED_OPERATION);
+            return $response->withHeader("Location", "tornei")->withStatus(302);
         }
     }
 

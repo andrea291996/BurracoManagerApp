@@ -48,12 +48,8 @@ $routes['GET'] = [
     ],
     //ISCRITTI
     [
-        'pattern' => '/utentiiscritti',
-        'callable' => 'IscrizioneController:mostraUtentiIscritti'
-    ],
-    [
-        'pattern' => '/circoliiscritti',
-        'callable' => 'IscrizioneController:mostraCircoliIscritti'
+        'pattern' => '/giocatoriiscrittitorneo',
+        'callable' => 'TorneoController:mostraGiocatoriIscrittiTorneo'
     ],
     //GIOCATORI 
     [

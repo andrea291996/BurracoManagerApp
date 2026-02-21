@@ -72,7 +72,10 @@
                     {{/tutte_squadre}}
 
                     {{#utenti_iscritti}}
-                    <button class="btn-admin">Giocatori Iscritti</button>
+                    <form method="GET" action="giocatoriiscrittitorneo">
+                        <input type="hidden" name="idtorneo" value="{{id_torneo}}">
+                        <button class="btn-admin">Giocatori Iscritti</button>
+                    </form>
                     {{/utenti_iscritti}}
 
                     {{#utenti_iscritti_ma_single}}
