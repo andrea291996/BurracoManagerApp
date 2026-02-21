@@ -61,7 +61,10 @@
                 {{/isAmministratore}}
                 <div class="admin-btn-group">
                     {{#chiudi_iscrizioni}}
-                    <button class="btn-admin-bold">Chiudi Iscrizioni</button>
+                    <form method="POST" action="chiudiiscrizioni">
+                        <input type="hidden" name="idtorneo" value="{{id_torneo}}">
+                        <button class="btn-admin-bold">Chiudi Iscrizioni</button>
+                    </form>
                     {{/chiudi_iscrizioni}}
 
                     {{#tutte_squadre}}

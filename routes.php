@@ -89,6 +89,10 @@ $routes['POST'] = [
         'pattern' => '/creanuovotorneo',
         'callable' => 'TorneoController:CreaNuovoTorneo'
     ],
+    [
+        'pattern' => '/chiudiiscrizioni',
+        'callable' => 'TorneoController:ChiudiIscrizioni'
+    ],
     //RICHIESTA SQUADRA
     [
         'pattern' => '/inviarichiesta',

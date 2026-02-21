@@ -148,5 +148,22 @@ class TorneoController extends Controller{
         return $response->withHeader("Location", "./tornei")->withStatus(301);
     }
 
+    public function chiudiIscrizioni(Request $request, Response $response, $args){
+        $user = $request->getAttribute('user');
+        $data = $request->getParsedBody();
+        $idTorneo = $data['idtorneo'];
+        if($user->isAmministratore()){
+            $risultato = $this->torneoService->chiudiIscrizioni($idTorneo);
+            if($risultato){
+                UIMessage::setSuccess(TOURNAMENT_CLOSE_SUCCESS);
+            }else{
+                UIMessage::setError(TOURNAMENT_CLOSE_FAILED);
+            }
+        }else{
+            UIMessage::setError(UNAUTHORIZED_OPERATION);
+        }
+        return $response->withHeader("Location", "./tornei")->withStatus(301);
+    }
+
 }
 

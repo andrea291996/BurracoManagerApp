@@ -114,4 +114,8 @@ class TorneoService{
     public function creaNuovoTorneo($nomeTorneo): bool{
         return $this->torneoRepository->inserisciNuovoTorneo($nomeTorneo);
     }
+
+    public function chiudiIscrizioni($idTorneo){
+        return $this->torneoRepository->chiudiIscrizioni($idTorneo);
+    }
 }

@@ -19,11 +19,14 @@ IscriviGiocatore per torneoId e userId
 class TorneoRepository{
     protected $database;
     protected $squadraRepository;
+    protected $utentiRepository;
 
     public function __construct()
     {
         $this->database = Database::instance();
         $this->squadraRepository = new SquadraRepository();
+        $this->utentiRepository = new UtentiRepository();
+
     }
 
     public function dammiStatoTorneo($torneoId): null | string{
@@ -151,6 +154,22 @@ class TorneoRepository{
         $torneo->setnometorneo($nomeTorneo);
         $torneo->setstatotorneo(STATUS_TOURNAMENT_OPEN);
         return (bool)$torneo->insert();
+    }
+
+    public function chiudiIscrizioni($idTorneo): bool{
+        $squadre = $this->squadraRepository->dammiSquadrePerTorneo($idTorneo);
+        $single = $this->squadraRepository->dammiGiocatoriSenzaSquadra($idTorneo);
+        $circoli = $this->utentiRepository->dammiCircoliIscrittiTorneo($idTorneo);
+        if(count($squadre)>1 && count($single)==0 && count($circoli) > 0){
+            $torneo = new Tornei();
+            $torneo->select(['idtorneo' => $idTorneo]);
+            $torneo->setstatotorneo(STATUS_TOURNAMENT_ONGOING);
+            return $torneo->update();
+        }else{
+            UIMessage::setError(TOURNAMENT_CLOSE_FAILED_DETAIL);
+            return false;
+        }
+        
     }
     
 }

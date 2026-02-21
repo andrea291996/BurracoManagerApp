@@ -25,6 +25,10 @@ define("TOURNAMENT_UNSUBSCRIPTION_FAILED", "Impossibile annullare l'iscrizione."
 define("TOURNAMENT_CREATION_SUCCESS", "Torneo creato con successo!");
 define("TOURNAMENT_CREATION_FAILED", "Impossibile creare il torneo.");
 
+define("TOURNAMENT_CLOSE_SUCCESS", "Iscrizioni chiuse con successo! Il torneo è ora pronto per la generazione del calendario.");
+define("TOURNAMENT_CLOSE_FAILED", "Errore: impossibile chiudere le iscrizioni.");
+define("TOURNAMENT_CLOSE_FAILED_DETAIL", "Errore: sono presenti giocatori senza squadra e/o meno di due squadre e/o nessun circolo iscritto");
+
 define("STATUS_TOURNAMENT_OPEN", "aperto");
 define("STATUS_TOURNAMENT_CLOSED", "concluso");
 define("STATUS_TOURNAMENT_ONGOING", "in corso");
