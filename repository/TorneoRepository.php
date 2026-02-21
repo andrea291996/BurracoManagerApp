@@ -145,5 +145,12 @@ class TorneoRepository{
         $circoloTorneo->select(['idcircolo' => $userId, 'idtorneo' => $torneoId]);
         return (bool)$circoloTorneo->delete();
     }
+
+    public function inserisciNuovoTorneo($nomeTorneo): bool{
+        $torneo = new Tornei();
+        $torneo->setnometorneo($nomeTorneo);
+        $torneo->setstatotorneo(STATUS_TOURNAMENT_OPEN);
+        return (bool)$torneo->insert();
+    }
     
 }

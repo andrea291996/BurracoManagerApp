@@ -22,6 +22,9 @@ define("ALREADY_ENROLLED", "Sei già iscritto a questo torneo!");
 define("TOURNAMENT_UNSUBSCRIPTION_SUCCESS", "Iscrizione annullata con successo!");
 define("TOURNAMENT_UNSUBSCRIPTION_FAILED", "Impossibile annullare l'iscrizione.");
 
+define("TOURNAMENT_CREATION_SUCCESS", "Torneo creato con successo!");
+define("TOURNAMENT_CREATION_FAILED", "Impossibile creare il torneo.");
+
 define("STATUS_TOURNAMENT_OPEN", "aperto");
 define("STATUS_TOURNAMENT_CLOSED", "concluso");
 define("STATUS_TOURNAMENT_ONGOING", "in corso");

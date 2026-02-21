@@ -1,0 +1,22 @@
+
+<div class="nb-login-container">
+    <p class="nb-reg-subtitle">Configurazione rapida evento</p>
+    
+    <form class="nb-form" method="POST" action="creanuovotorneo">
+        <div class="nb-form-group">
+            <label class="nb-label" for="nometorneo">Nome del Torneo</label>
+            <input 
+                type="text" 
+                id="nometorneo" 
+                name="nometorneo" 
+                class="nb-input" 
+                placeholder="es: Torneo d'Estate 2026" 
+                required
+            >
+        </div>
+        <button type="submit" class="nb-submit-btn">
+            Crea Torneo Ora
+        </button>
+        
+    </form>
+</div>

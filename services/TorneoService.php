@@ -110,4 +110,8 @@ class TorneoService{
         }
         return false;
     }
+
+    public function creaNuovoTorneo($nomeTorneo): bool{
+        return $this->torneoRepository->inserisciNuovoTorneo($nomeTorneo);
+    }
 }

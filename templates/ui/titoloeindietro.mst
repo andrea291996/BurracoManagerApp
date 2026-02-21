@@ -8,4 +8,9 @@
     <h1 class="main-title">
         {{titolo}}
     </h1>
+    {{#isAmministratore}} 
+        <a href="creanuovotorneo" class="btn-participation-black" style="text-decoration: none; margin-bottom: 10px;">
+            + Crea Nuovo Torneo
+        </a>
+    {{/isAmministratore}}
 </header>

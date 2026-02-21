@@ -33,6 +33,10 @@ $routes['GET'] = [
         'pattern' => '/mieitornei',
         'callable' => 'TorneoController:mostraMieiTornei'
     ],
+    [
+        'pattern' => '/creanuovotorneo',
+        'callable' => 'TorneoController:mostraCreaNuovoTorneo'
+    ],
     //SQUADRE
     [
         'pattern' => '/miasquadra',
@@ -68,7 +72,7 @@ $routes['POST'] = [
         'pattern' => '/registrazione',
         'callable' => 'UserRegistrationController:doRegistration'
     ],
-    //AZIONI
+    //TORNEO
     [
         'pattern' => '/iscrivi',
         'callable' => 'TorneoController:iscrivi'
@@ -76,6 +80,10 @@ $routes['POST'] = [
     [
         'pattern' => '/disiscrivi',
         'callable' => 'TorneoController:disiscrivi'
+    ],
+    [
+        'pattern' => '/creanuovotorneo',
+        'callable' => 'TorneoController:CreaNuovoTorneo'
     ],
     //RICHIESTA SQUADRA
     [

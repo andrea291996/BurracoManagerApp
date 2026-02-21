@@ -16,11 +16,10 @@ class TorneoController extends Controller{
         $page = PageConfigurator::instance()->getPage(); 
         $page->setTitle("Tornei");
         $user = $request->getAttribute('user');
-        
         $risultato = $this->torneoService->ottieniTornei($user);
         $data = $risultato['data'];
         $template = $risultato['template'];
-        $page->add("content", new HeaderView("ui/titoloeindietro.mst", ['backUrl' => "./", 'titolo' => "Tornei"]));
+        $page->add("content", new HeaderView("ui/titoloeindietro.mst", ['backUrl' => "./", 'titolo' => "Tornei", "isAmministratore" => $user->isAmministratore()]));
         $page->add("content", new TorneiView($template, ['data'=>$data]));
         return $response;
     }
@@ -37,6 +36,17 @@ class TorneoController extends Controller{
         return $response;
     }
 
+    function mostraCreaNuovoTorneo(Request $request, Response $response, $args){
+        $page = PageConfigurator::instance()->getPage(); 
+        $page->setTitle("Crea Nuovo Torneo");
+        $user = $request->getAttribute('user');
+        if($user->isAmministratore()){
+            $page->add("content", new HeaderView("ui/titoloeindietro.mst", ['backUrl' => "tornei", 'titolo' => "Crea nuovo torneo"]));
+            $page->add("content", new TorneiView("tornei/creanuovotorneo.mst"));
+            return $response;
+        }
+    }
+
     //AZIONI
 
     //POST
@@ -46,7 +56,6 @@ class TorneoController extends Controller{
         $data = $request->getParsedBody();
         $torneoId = $data['idtorneo'];
         $risultato = $this->torneoService->iscrivi($torneoId, $user);
-        
         if($risultato){
             UIMessage::setSuccess(TOURNAMENT_REGISTRATION_SUCCESS);
             return $response->withHeader("Location", "./mieitornei")->withStatus(301);
@@ -61,11 +70,27 @@ class TorneoController extends Controller{
         $data = $request->getParsedBody();
         $torneoId = $data['idtorneo'];
         $risultato = $this->torneoService->disiscrivi($torneoId, $user);
-        
         if($risultato){
             UIMessage::setSuccess(TOURNAMENT_UNSUBSCRIPTION_SUCCESS);
         }else{
             UIMessage::setError(TOURNAMENT_UNSUBSCRIPTION_FAILED);
+        }
+        return $response->withHeader("Location", "./tornei")->withStatus(301);
+    }
+
+    public function creaNuovoTorneo(Request $request, Response $response, $args){
+        $user = $request->getAttribute('user');
+        $data = $request->getParsedBody();
+        $nomeTorneo = $data['nometorneo'];
+        if($user->isAmministratore()){
+            $risultato = $this->torneoService->creaNuovoTorneo($nomeTorneo);
+            if($risultato){
+                UIMessage::setSuccess(TOURNAMENT_CREATION_SUCCESS);
+            }else{
+                UIMessage::setError(TOURNAMENT_CREATION_FAILED);
+            }
+        }else{
+            UIMessage::setError(UNAUTHORIZED_OPERATION);
         }
         return $response->withHeader("Location", "./tornei")->withStatus(301);
     }
