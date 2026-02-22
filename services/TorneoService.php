@@ -20,6 +20,7 @@ class TorneoService{
     protected $utentiRepository;
     protected $calendarioRepository;
     protected $distanzeRepository;
+    protected $partiteService;
 
     public function __construct()
     {
@@ -28,6 +29,7 @@ class TorneoService{
         $this->utentiRepository = new UtentiRepository();
         $this->calendarioRepository = new CalendarioRepository();
         $this->distanzeRepository = new DistanzeRepository();
+        $this->partiteService = new PartiteService();
     }
 
     public function ottieniTornei($user, $miei = false): array{
@@ -124,16 +126,17 @@ class TorneoService{
     }
 
     public function chiudiIscrizioni($idTorneo){
-        $risultato = $this->torneoRepository->chiudiIscrizioni($idTorneo);
-        if($risultato){
+        //$risultato = $this->torneoRepository->chiudiIscrizioni($idTorneo);
+        //if($risultato){
             $squadre = $this->squadraRepository->dammiSquadrePerTorneo($idTorneo);
             $circoli = $this->utentiRepository->dammiCircoliIscrittiTorneo($idTorneo);
             $distanze = $this->distanzeRepository->dammiDistanzeSquadreCircoli($squadre, $circoli);
             $giornate = GIORNATE;
-            
-            $calendario = Algoritmo::generaCalendario($squadre, $circoli, $giornate, $distanze);
+            $partite = Algoritmo::generaPartite($squadre, $circoli, $distanze, $giornate);
+            $this->partiteService->preparaPartite($partite, $idTorneo);
+            var_dump($partite);exit;
             return $risultato;
-        }
+        //}
         
 
     }

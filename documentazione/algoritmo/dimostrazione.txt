@@ -1,0 +1,61 @@
+ALGORITMO
+    Match,Scontro,Circolo Scelto,KM Inquinanti
+    0,Squadra 2 vs 3,Circolo 6,9.35 km
+    1,Squadra 4 vs 5,Circolo 5,12.11 km
+    2,Squadra 2 vs 4,Circolo 6,9.68 km
+    3,Squadra 3 vs 5,Circolo 5,11.80 km
+    4,Squadra 2 vs 5,Circolo 5,9.42 km
+    5,Squadra 3 vs 4,Circolo 6,8.66 km
+    ---,---,---,---
+    TOTALE,,,61.02 km
+
+SOLO CIRCOLO 6
+    Match,Scontro,Circolo,Distanza (KM)
+    0,Squadra 2 vs 3,Circolo 6,9.35
+    1,Squadra 4 vs 5,Circolo 6,18.47
+    2,Squadra 2 vs 4,Circolo 6,9.68
+    3,Squadra 3 vs 5,Circolo 6,18.15
+    4,Squadra 2 vs 5,Circolo 6,19.16
+    5,Squadra 3 vs 4,Circolo 6,8.66
+    TOTALE,,,83.47 KM
+
+SOLO CIRCOLO 5
+    Match,Scontro,Circolo,Distanza (KM)
+    0,Squadra 2 vs 3,Circolo 5,21.22
+    1,Squadra 4 vs 5,Circolo 5,12.11
+    2,Squadra 2 vs 4,Circolo 5,21.53
+    3,Squadra 3 vs 5,Circolo 5,11.80
+    4,Squadra 2 vs 5,Circolo 5,9.42
+    5,Squadra 3 vs 4,Circolo 5,23.91
+    TOTALE,,,99.99 KM
+
+NESSUNO VA A PIEDI 
+ALGORITMO
+    Match,Scontro,Circolo,Distanza (KM)
+    0,Squadra 2 vs 3,Circolo 6,9.35
+    1,Squadra 4 vs 5,Circolo 5,13.28
+    2,Squadra 2 vs 4,Circolo 6,9.68
+    3,Squadra 3 vs 5,Circolo 5,12.97
+    4,Squadra 2 vs 5,Circolo 5,10.59
+    5,Squadra 3 vs 4,Circolo 6,8.66
+    TOTALE,,,64.53 KM
+
+SOLO CIRCOLO 6  
+    Match,Scontro,Circolo,Distanza (KM)
+    0,Squadra 2 vs 3,Circolo 6,9.35
+    1,Squadra 4 vs 5,Circolo 6,18.47
+    2,Squadra 2 vs 4,Circolo 6,9.68
+    3,Squadra 3 vs 5,Circolo 6,18.15
+    4,Squadra 2 vs 5,Circolo 6,19.16
+    5,Squadra 3 vs 4,Circolo 6,8.66
+    TOTALE,,,83.47 KM
+
+SOLO CIRCOLO 5
+    Match,Scontro,Circolo,Distanza (KM)
+    0,Squadra 2 vs 3,Circolo 5,21.22
+    1,Squadra 4 vs 5,Circolo 5,13.28
+    2,Squadra 2 vs 4,Circolo 5,21.53
+    3,Squadra 3 vs 5,Circolo 5,12.97
+    4,Squadra 2 vs 5,Circolo 5,10.59
+    5,Squadra 3 vs 4,Circolo 5,23.91
+    TOTALE,,,103.50 KM
