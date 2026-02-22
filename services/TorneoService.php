@@ -81,8 +81,9 @@ class TorneoService{
                 'stato_torneo' => $torneo->getstatotorneo(),
                 'pulsante_info' => true,
                 'la_mia_squadra' => $tipologiaUtente == "giocatore" && $isIscritto,
+                'le_mie_partite' => $tipologiaUtente == "giocatore" && $isIscritto && $stato == STATUS_TOURNAMENT_ONGOING,
                 'calendario' => $stato == STATUS_TOURNAMENT_ONGOING,
-                'classifica' => $stato == STATUS_TOURNAMENT_CLOSED,
+                'classifica' => $stato == STATUS_TOURNAMENT_CLOSED || $stato == STATUS_TOURNAMENT_ONGOING,
                 'isGiocatoreOCircoloIscritto' =>
                  ($stato == STATUS_TOURNAMENT_OPEN && !$isIscritto && ($tipologiaUtente == "giocatore" || $tipologiaUtente == "circolo")) || 
                  ($stato == STATUS_TOURNAMENT_OPEN && $isIscritto && ($tipologiaUtente == "giocatore" || $tipologiaUtente == "circolo")) || 
@@ -125,19 +126,16 @@ class TorneoService{
         return $this->torneoRepository->inserisciNuovoTorneo($nomeTorneo);
     }
 
-    public function chiudiIscrizioni($idTorneo){
-        //$risultato = $this->torneoRepository->chiudiIscrizioni($idTorneo);
-        //if($risultato){
+    public function chiudiIscrizioni($idTorneo){ //SISTEMA IL RETURN
+        $risultato = $this->torneoRepository->chiudiIscrizioni($idTorneo);
+        if($risultato){
             $squadre = $this->squadraRepository->dammiSquadrePerTorneo($idTorneo);
             $circoli = $this->utentiRepository->dammiCircoliIscrittiTorneo($idTorneo);
             $distanze = $this->distanzeRepository->dammiDistanzeSquadreCircoli($squadre, $circoli);
             $giornate = GIORNATE;
             $partite = Algoritmo::generaPartite($squadre, $circoli, $distanze, $giornate);
-            $this->partiteService->preparaPartite($partite, $idTorneo);
-            var_dump($partite);exit;
+            $this->partiteService->inserisciPartite($partite, $idTorneo);
             return $risultato;
-        //}
-        
-
+        }
     }
 }

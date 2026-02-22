@@ -31,6 +31,7 @@
 
             {{#isGiocatoreOCircoloIscritto}}
             <p class="section-label">Partecipazione</p>
+            <p></p>
             {{/isGiocatoreOCircoloIscritto}}
             <div class="btn-group" style="margin-bottom: 40px;">
                 {{#iscriviti}}
@@ -46,6 +47,13 @@
                         <button class="btn-participation-black">La Mia Squadra</button>
                     </form>
                 {{/la_mia_squadra}}
+
+                {{#le_mie_partite}}
+                    <form method="GET" action="miepartite">
+                        <input type="hidden" name="idtorneo" value="{{id_torneo}}">
+                        <button class="btn-participation-black">Le Mie Partite</button>
+                    </form>
+                {{/le_mie_partite}}
 
                 {{#disiscriviti}}
                     <form method="POST" action="disiscrivi">

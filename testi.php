@@ -52,5 +52,10 @@ define("STATUS_REQUEST_ACCEPTED", "accettata");
 define("STATUS_REQUEST_REJECTED", "rifiutata");
 define("STATUS_REQUEST_CANCELLED", "annullata");
 
+// --- PUNTEGGI PARTITA ---
+
+define("SCORE_INSERT_SUCCESS", "Punteggio inserito con successo.");
+define("SCORE_ALREADY_EXIST", "Hai già inserito un punteggio per questo match.");
+
 // --- SICUREZZA E PERMESSI ---
 define("UNAUTHORIZED_OPERATION", "Operazione non autorizzata.");

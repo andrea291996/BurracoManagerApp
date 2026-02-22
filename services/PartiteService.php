@@ -3,10 +3,7 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-/*
-ottieni tutti i giocatori
-ottieni tutti i circoli
-*/
+
 
 class PartiteService{
 
@@ -18,12 +15,18 @@ class PartiteService{
     {
         $this->utentiRepository = new UtentiRepository;
         $this->squadraRepository = new SquadraRepository;
-         $this->partiteRepository = new PartiteRepository;
+        $this->partiteRepository = new PartiteRepository;
     }
 
-    public function preparaPartite($partite, $idTorneo){
+    public function inserisciPartite($partite, $idTorneo){
         foreach($partite as $partita){
             $this->partiteRepository->inserisciPartita($partita, $idTorneo);
         }
     }
+
+    public function ottieniPartite($user, $idTorneo){
+        
+    }
+
+    
 }
