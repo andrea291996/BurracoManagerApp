@@ -11,16 +11,24 @@ class PartiteController extends Controller{
         $this->partiteService = new PartiteService();
     }
     
-    function mostraMiePartite(Request $request, Response $response, $args) {    
+    function mostraPartiteTorneo(Request $request, Response $response, $args){
         $page = PageConfigurator::instance()->getPage(); 
         $page->setTitle("Le mie partite");
         $user = $request->getAttribute('user');
         $idTorneo = $request->getQueryParams('idtorneo');
         $idTorneo = $idTorneo['idtorneo'];
         $partite = $this->partiteService->ottieniPartite($user, $idTorneo);
-        $page->add("content", new PartiteView("partite/partite", $partite));
-        return $response;
+        $referer = $request->getHeaderLine('Referer');
+        $backUrl = (strpos($referer, 'mieitornei') !== false) ? 'mieitornei' : 'tornei';
+        if($user->isAmministratore()){
+            $titolo = "tutte le partite";
+        }else{
+            $titolo = "le mie partite";
         }
-        
+        $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => $backUrl, 'titolo' => $titolo]));
+        $page->add("content", new PartiteView("partite/partite", ['data'=>$partite]));
+        return $response;
+    }
+  
 }
 

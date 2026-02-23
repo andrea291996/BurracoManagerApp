@@ -39,8 +39,8 @@ $routes['GET'] = [
     ],
     //PARTITE
     [
-        'pattern' => '/miepartite',
-        'callable' => 'PartiteController:mostraMiePartite'
+        'pattern' => '/partite',
+        'callable' => 'PartiteController:mostraPartiteTorneo'
     ],
     //SQUADRE
     [

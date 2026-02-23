@@ -2,7 +2,7 @@
 
 /* 
 *  ClassName: Validazionepunteggi
-*  Generated: 2026-02-22 15:57:39
+*  Generated: 2026-02-23 11:02:33
 *  Author: Andrea Carminati (default)
 *  Table: validazionepunteggi
 *  Database: burraco
@@ -12,7 +12,7 @@ define("VALIDAZIONEPUNTEGGI_TABLE","validazionepunteggi");
 
 class Validazionepunteggi extends DBObject
 {
-	protected $idvalidazionepunteggio;
+	protected $idvalidazionepunteggi;
 	protected $idgiocatore;
 	protected $idpartita;
 	protected $idsquadra1;
@@ -23,12 +23,12 @@ class Validazionepunteggi extends DBObject
 	// Class Constructor
 	public function __construct() {
 		parent::__construct(VALIDAZIONEPUNTEGGI_TABLE);
-        $this->primaryKey="idvalidazionepunteggio";
+        $this->primaryKey="idvalidazionepunteggi";
 		return $this;
 	}
 	//Getter methods
-	function getidvalidazionepunteggio(){
-		return $this->idvalidazionepunteggio;
+	function getidvalidazionepunteggi(){
+		return $this->idvalidazionepunteggi;
 	}
 
 	function getidgiocatore(){
@@ -57,8 +57,8 @@ class Validazionepunteggi extends DBObject
 
 
 	//Setter methods
-	function setidvalidazionepunteggio($value){
-		$this->idvalidazionepunteggio=$value;
+	function setidvalidazionepunteggi($value){
+		$this->idvalidazionepunteggi=$value;
 	}
 
 	function setidgiocatore($value){

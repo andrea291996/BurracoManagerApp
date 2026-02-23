@@ -94,4 +94,10 @@ class UtentiRepository{
         $giocatore->setpassword(null);
         return $giocatore;
     }
+
+    public function dammiCircoloPerId($idCircolo){
+        $circolo = new Accountcircoli();
+        $circolo->select(['idcircolo' => $idCircolo]);
+        return $circolo;
+    }
 }

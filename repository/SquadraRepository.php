@@ -61,7 +61,14 @@ class SquadraRepository{
         return [];
     }
 
+    public function dammiSquadraPerSquadraId($squadraId){
+        $squadra = new Squadre();
+        $squadra->select(['idsquadra'=>$squadraId]);
+        return $squadra;
+    }
 
+
+    //dammimiasquadra
     public function dammiSquadra($userId, $torneoId): Squadre | null{
         if(!$this->HaSquadra($userId, $torneoId)){
             return null;
@@ -77,6 +84,30 @@ class SquadraRepository{
             }
         }
         return null;
+    }
+
+    public function dammiIdSquadraAvversaria($idSquadra, $idPartita){
+        $partita = new Partite();
+        $partita->select(['idpartita' => $idPartita]);
+        $idSquadra1 = $partita->getidsquadra1();
+        $idSquadra2 = $partita->getidsquadra2();
+        if($idSquadra == $idSquadra1){
+            return $idSquadra2;
+        }elseif($idSquadra == $idSquadra2){
+            return $idSquadra1;
+        }
+    }
+
+    public function dammiIdMiaSquadra($idSquadra, $idPartita){
+        $partita = new Partite();
+        $partita->select(['idpartita' => $idPartita]);
+        $idSquadra1 = $partita->getidsquadra1();
+        $idSquadra2 = $partita->getidsquadra2();
+        if($idSquadra == $idSquadra1){
+            return $idSquadra1;
+        }elseif($idSquadra == $idSquadra2){
+            return $idSquadra2;
+        }
     }
 
     public function dammiCompagnoSquadra($userId, $torneoId): null | Accountgiocatori{

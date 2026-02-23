@@ -1,0 +1,100 @@
+<div class="tornei-wrapper">
+    <div class="partite-container">
+        {{#data}}
+        <div class="torneo-card">
+            <div class="card-header">
+                <h2>Giornata {{giornata}}</h2>
+                <span class="status-badge">Turno {{turno}}</span>
+            </div>
+
+            <div class="card-body">
+                <p class="section-label">Luogo dell'incontro</p>
+                <div class="sq-name">{{circolo}}</div>
+
+                <div class="nb-divider" style="margin: 30px 0;"></div>
+
+                {{#miasquadra}}
+                <div class="match-row">
+                    <div class="team-box">
+                        <p class="section-label">La tua squadra</p>
+                        <div class="sq-name">{{nome_compagno1}} {{cognome_compagno1}}</div>
+                        <div class="sq-name">{{nome_compagno2}} {{cognome_compagno2}}</div>
+                        <div class="hero-title" style="font-size: 4rem;">{{punteggiomiasquadra}}</div>
+                    </div>
+
+                    <div class="vs-box">
+                        <span class="statement-text" style="font-size: 2rem;">VS</span>
+                    </div>
+
+                    <div class="team-box">
+                        <p class="section-label">Avversari</p>
+                        <div class="sq-name">{{nome_avversario1}} {{cognome_avversario1}}</div>
+                        <div class="sq-name">{{nome_avversario2}} {{cognome_avversario2}}</div>
+                        <div class="hero-title" style="font-size: 4rem;">{{punteggiosquadraavversaria}}</div>
+                    </div>
+                </div>
+
+                <div class="admin-panel" style="margin-top: 20px;">
+                    {{#stato_da_inserire}}
+                        <p class="admin-title">Inserimento Risultato</p>
+                        <form method="POST" action="salvapunteggio"> <input type="hidden" name="idpartita" value="{{idpartita}}">
+                            <input type="hidden" name="idmiasquadra" value="{{idmiasquadra}}">
+                            <input type="hidden" name="idsquadraavversaria" value="{{idsquadraavversaria}}">
+                            
+                            <div class="score-input-row" style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; margin-bottom: 20px;">
+                                <div class="input-group">
+                                    <p class="section-label" style="font-size: 0.6rem;">Punti Tuoi</p>
+                                    <input type="number" name="punti_mia" class="nb-input" style="width: 100%; text-align: center; font-size: 1.5rem; font-weight: 900;" placeholder="0" required>
+                                </div>
+
+                                <div style="font-weight: 900; font-size: 1.2rem; margin-top: 20px;">—</div>
+
+                                <div class="input-group">
+                                    <p class="section-label" style="font-size: 0.6rem;">Punti Avversari</p>
+                                    <input type="number" name="punti_avversaria" class="nb-input" style="width: 100%; text-align: center; font-size: 1.5rem; font-weight: 900;" placeholder="0" required>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-participation-black" style="width: 100%; margin: 0;">Invia e Conferma</button>
+                        </form>
+                    {{/stato_da_inserire}}
+
+                    {{#stato_in_attesa}}
+                        <div style="border: 3px dashed #000; padding: 15px; text-align: center;">
+                            <p class="admin-title" style="margin:0;">⏳ In attesa di validazione</p>
+                        </div>
+                    {{/stato_in_attesa}}
+
+                    {{#stato_validato}}
+                        <div style="background: #000; color: #fff; padding: 10px; text-align: center;">
+                            <p class="admin-title" style="color:#fff; margin:0;">✓ Punteggio Confermato</p>
+                        </div>
+                    {{/stato_validato}}
+                </div>
+                {{/miasquadra}}
+
+                {{^miasquadra}}
+                <div class="match-row">
+                    <div class="team-box">
+                        <p class="section-label">Squadra 1</p>
+                        <div class="sq-name">{{nome_compagno1_squadra1}} {{cognome_compagno1_squadra1}}</div>
+                        <div class="sq-name">{{nome_compagno2_squadra1}} {{cognome_compagno2_squadra1}}</div>
+                        <div class="hero-title" style="font-size: 3.5rem;">{{punteggiosquadra1}}</div>
+                    </div>
+                    <div class="vs-box">
+                        <span class="statement-text" style="font-size: 2rem;">VS</span>
+                    </div>
+                    <div class="team-box">
+                        <p class="section-label">Squadra 2</p>
+                        <div class="sq-name">{{nome_compagno1_squadra2}} {{cognome_compagno1_squadra2}}</div>
+                        <div class="sq-name">{{nome_compagno2_squadra2}} {{cognome_compagno2_squadra2}}</div>
+                        <div class="hero-title" style="font-size: 3.5rem;">{{punteggiosquadra2}}</div>
+                    </div>
+                </div>
+                {{/miasquadra}}
+            </div>
+        </div>
+        {{/data}}
+    </div>
+</div>
+

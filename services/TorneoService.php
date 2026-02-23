@@ -82,6 +82,7 @@ class TorneoService{
                 'pulsante_info' => true,
                 'la_mia_squadra' => $tipologiaUtente == "giocatore" && $isIscritto,
                 'le_mie_partite' => $tipologiaUtente == "giocatore" && $isIscritto && $stato == STATUS_TOURNAMENT_ONGOING,
+                'tutte_partite' => $tipologiaUtente == "amministratore"  && $stato == STATUS_TOURNAMENT_ONGOING,
                 'calendario' => $stato == STATUS_TOURNAMENT_ONGOING,
                 'classifica' => $stato == STATUS_TOURNAMENT_CLOSED || $stato == STATUS_TOURNAMENT_ONGOING,
                 'isGiocatoreOCircoloIscritto' =>

@@ -23,27 +23,44 @@ class PartiteRepository{
     }
 
     public function dammiPartitePerTorneo($idTorneo){
-        
+        $sql = "SELECT * FROM partite WHERE idtorneo = ?";
+        $sth = $this->database->prepare($sql);
+        $sth->execute([$idTorneo]);
+        $partiteGrezze = $sth->fetchAll();
+        $partite = [];
+        foreach($partiteGrezze as $partitaGrezza){
+            $partita = $this->dammiPartitaPerId($partitaGrezza['idpartita']);
+            $partite[] = $partita;
+        }
+        return $partite;
     }
 
-    public function dammiIdSquadraAvversaria($idSquadra, $idPartita){
+    public function dammiPartitaPerId($idPartita): Partite{
         $partita = new Partite();
         $partita->select(['idpartita' => $idPartita]);
-        $idSquadra1 = $partita->getsquadra1();
-        $idSquadra2 = $partita->getsquadra2();
-        if($idSquadra == $idSquadra1){
-            return $idSquadra2;
-        }elseif($idSquadra == $idSquadra2){
-            return $idSquadra1;
+        return $partita;
+    }
+
+    public function dammiPunteggioSquadraPerPartita($idSquadra, $idPartita){
+        $sql = "SELECT punteggio FROM punteggipartita WHERE idsquadra = ? AND idpartita = ?";
+        $sth = $this->database->prepare($sql);
+        $sth->execute([$idSquadra, $idPartita]);
+        $risultato = $sth->fetch();
+        if(empty($risultato)){
+            return false;
+        }else{
+            return $risultato['punteggio'];
         }
     }
+
+    
 
     //AZIONI
 
     public function inserisciPartita($partitaArr, $idTorneo): bool{
         $partita = new Partite();
-        $partita->setsquadra1($partitaArr['squadra1']);
-        $partita->setsquadra2($partitaArr['squadra2']);
+        $partita->setidsquadra1($partitaArr['squadra1']);
+        $partita->setidsquadra2($partitaArr['squadra2']);
         $partita->setgiornata($partitaArr['giornata']);
         $partita->setturno($partitaArr['turno']);
         $partita->setdistanzapercorsainquinandodagiocatorimetri($partitaArr['km_totali']*1000);
@@ -66,7 +83,7 @@ class PartiteRepository{
         }else{
             $squadra = $this->squadraRepository->dammiSquadra($idGiocatore, $idTorneo);
             $idSquadra = $squadra->getidsquadra();
-            $idSquadraAvversaria = $this->dammiIdSquadraAvversaria($idSquadra, $idPartita);
+            $idSquadraAvversaria = $this->squadraRepository->dammiIdSquadraAvversaria($idSquadra, $idPartita);
             $mioPunteggio = new Validazionepunteggi();
         }
     }
@@ -82,6 +99,18 @@ class PartiteRepository{
             return true;
         }
     }   
+
+    public function esistePunteggioPartita($idPartita){
+        $sql = "SELECT * FROM punteggipartita WHERE idpartita = ?";
+        $sth = $this->database->prepare($sql);
+        $sth->execute([$idPartita]);
+        $risultato = $sth->fetchAll();
+        if(count($risultato) === 2){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     
 

@@ -2,7 +2,7 @@
 
 /* 
 *  ClassName: Partite
-*  Generated: 2026-02-22 15:57:33
+*  Generated: 2026-02-23 10:05:50
 *  Author: Andrea Carminati (default)
 *  Table: partite
 *  Database: burraco
@@ -13,8 +13,8 @@ define("PARTITE_TABLE","partite");
 class Partite extends DBObject
 {
 	protected $idpartita;
-	protected $squadra1;
-	protected $squadra2;
+	protected $idsquadra1;
+	protected $idsquadra2;
 	protected $idcircolo;
 	protected $idtorneo;
 	protected $giornata;
@@ -32,12 +32,12 @@ class Partite extends DBObject
 		return $this->idpartita;
 	}
 
-	function getsquadra1(){
-		return $this->squadra1;
+	function getidsquadra1(){
+		return $this->idsquadra1;
 	}
 
-	function getsquadra2(){
-		return $this->squadra2;
+	function getidsquadra2(){
+		return $this->idsquadra2;
 	}
 
 	function getidcircolo(){
@@ -66,12 +66,12 @@ class Partite extends DBObject
 		$this->idpartita=$value;
 	}
 
-	function setsquadra1($value){
-		$this->squadra1=$value;
+	function setidsquadra1($value){
+		$this->idsquadra1=$value;
 	}
 
-	function setsquadra2($value){
-		$this->squadra2=$value;
+	function setidsquadra2($value){
+		$this->idsquadra2=$value;
 	}
 
 	function setidcircolo($value){

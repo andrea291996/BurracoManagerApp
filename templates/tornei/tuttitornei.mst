@@ -49,7 +49,7 @@
                 {{/la_mia_squadra}}
 
                 {{#le_mie_partite}}
-                    <form method="GET" action="miepartite">
+                    <form method="GET" action="partite">
                         <input type="hidden" name="idtorneo" value="{{id_torneo}}">
                         <button class="btn-participation-black">Le Mie Partite</button>
                     </form>
@@ -81,6 +81,13 @@
                         <button class="btn-admin">Tutte le Squadre</button>
                     </form>
                     {{/tutte_squadre}}
+
+                    {{#tutte_partite}}
+                        <form method="GET" action="partite">
+                            <input type="hidden" name="idtorneo" value="{{id_torneo}}">
+                            <button class="btn-admin">Tutte le partite</button>
+                        </form>
+                    {{/tutte_partite}}
 
                     {{#utenti_iscritti}}
                     <form method="GET" action="giocatoriiscrittitorneo">
