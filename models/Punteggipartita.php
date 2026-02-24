@@ -2,7 +2,7 @@
 
 /* 
 *  ClassName: Punteggipartita
-*  Generated: 2026-02-23 11:02:26
+*  Generated: 2026-02-24 09:20:56
 *  Author: Andrea Carminati (default)
 *  Table: punteggipartita
 *  Database: burraco

@@ -119,6 +119,11 @@ $routes['POST'] = [
     [
         'pattern' => '/rifiutarichiesta',
         'callable' => 'SquadraController:rifiutaRichiesta'
+    ],
+    //PUNTEGGI
+    [
+        'pattern' => '/inseriscimiopunteggio',
+        'callable' => 'PartiteController:inserisciMioPunteggio'
     ]
 ];
 

@@ -54,6 +54,7 @@ class PartiteService{
                         'idpartita' => $partita->getidpartita(),
                         'idmiasquadra'=> $idMiaSquadra,
                         'idsquadraavversaria' => $idsquadraavversaria,
+                        'idtorneo' => $idTorneo,
                         'giornata' => $giornata,
                         'turno' => $turno,
                         'circolo' => $circolo->getnome(),
@@ -104,6 +105,19 @@ class PartiteService{
                 }
         }
         return $data;
+    }
+
+    //AZIONI
+
+    public function inserisciMioPunteggio($data, $user){
+       $risultato = $this->partiteRepository->inserisciMioPunteggio($data, $user);
+        if($risultato){
+            if($this->partiteRepository->hannoTuttiIGiocatoriInseritoIlPunteggio($data['idpartita'])){
+                if($this->partiteRepository->controllaSePunteggiCoincidono($data['idpartita'])){
+                    UIMessage::setSuccess(SCORE_MATCH_SUCCESS);
+                }
+            }
+        }
     }
 
     

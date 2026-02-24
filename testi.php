@@ -56,6 +56,9 @@ define("STATUS_REQUEST_CANCELLED", "annullata");
 
 define("SCORE_INSERT_SUCCESS", "Punteggio inserito con successo.");
 define("SCORE_ALREADY_EXIST", "Hai già inserito un punteggio per questo match.");
+define("SCORE_INSERT_NEGATIVE", "Il punteggio non può essere negativo.");
+define("SCORE_MISMATCH", "I punteggi inseriti dai giocatori non coincidono.");
+define("SCORE_MATCH_SUCCESS", "Tutti i punteggi coincidono! Il risultato è stato validato.");
 
 // --- SICUREZZA E PERMESSI ---
 define("UNAUTHORIZED_OPERATION", "Operazione non autorizzata.");

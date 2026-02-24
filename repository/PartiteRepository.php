@@ -70,21 +70,99 @@ class PartiteRepository{
     }
 
     public function inserisciPunteggioPartita($idPartita, $idSquadra, $punteggio): bool{
-        $punteggioPartita = new Punteggiopartita();
+        $punteggioPartita = new Punteggipartita();
         $punteggioPartita->setidpartita($idPartita);
         $punteggioPartita->setidsquadra($idSquadra);
         $punteggioPartita->setpunteggio($punteggio);
-        return $punteggioPartita->insert() > 0;
+        return $punteggioPartita->insert();
     }
 
-    public function inserisciMioPunteggio($idGiocatore, $idPartita, $punteggio, $idTorneo){
+    public function inserisciMioPunteggio($data, $user): bool{
+        $idGiocatore = $user->getidgiocatore();
+        $idPartita = $data['idpartita'];
         if($this->HaInseritoPunteggio($idGiocatore, $idPartita)){
             UIMessage::setError(SCORE_ALREADY_EXIST);
         }else{
-            $squadra = $this->squadraRepository->dammiSquadra($idGiocatore, $idTorneo);
-            $idSquadra = $squadra->getidsquadra();
-            $idSquadraAvversaria = $this->squadraRepository->dammiIdSquadraAvversaria($idSquadra, $idPartita);
-            $mioPunteggio = new Validazionepunteggi();
+            $idMiaSquadra = $data['idmiasquadra'];
+            $idSquadraAvversaria = $data['idsquadraavversaria'];
+            $puntiMiaSquadra = $data['puntimiasquadra'];
+            $puntiSquadraAvversaria = $data['puntisquadraavversaria'];
+            if($puntiMiaSquadra < 0 || $puntiSquadraAvversaria < 0){
+                UIMessage::setError(SCORE_INSERT_NEGATIVE);
+                return false;
+            }
+            $idTorneo = $data['idtorneo'];
+            $partita = $this->dammiPartitaPerId($idPartita);
+            $idSquadra1 = $partita->getidsquadra1();
+            $idSquadra2 = $partita->getidsquadra2();
+            if($idMiaSquadra == $idSquadra1){
+                $idSquadra1 = $idMiaSquadra;
+                $idSquadra2 = $idSquadraAvversaria;
+                $punteggiosquadra1 = $puntiMiaSquadra;
+                $punteggiosquadra2 = $puntiSquadraAvversaria;
+            }else{
+                $idSquadra1 = $idSquadraAvversaria;
+                $idSquadra2 = $idMiaSquadra;
+                $punteggiosquadra1 = $puntiSquadraAvversaria;
+                $punteggiosquadra2 = $puntiMiaSquadra;
+            }
+            $validazionePunteggi = new Validazionepunteggi();
+            $validazionePunteggi->setidgiocatore($idGiocatore);
+            $validazionePunteggi->setidpartita($idPartita);
+            $validazionePunteggi->setidsquadra1($idSquadra1);
+            $validazionePunteggi->setidsquadra2($idSquadra2);
+            $validazionePunteggi->setpunteggiosquadra1($punteggiosquadra1);
+            $validazionePunteggi->setpunteggiosquadra2($punteggiosquadra2);
+            $risultato = $validazionePunteggi->insert();
+        }
+        if($risultato){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function hannoTuttiIGiocatoriInseritoIlPunteggio($idPartita): bool{
+        $sql = "SELECT count(*) FROM validazionepunteggi WHERE idpartita = ?";
+        $sth = $this->database->prepare($sql);
+        $sth->execute([$idPartita]);
+        $risultato = $sth->fetchColumn();
+        if($risultato == 4){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function controllaSePunteggiCoincidono($idPartita): bool{
+        $sql = "SELECT * FROM validazionepunteggi WHERE idpartita = ?";
+        $sth = $this->database->prepare($sql);
+        $sth->execute([$idPartita]);
+        $data = $sth->fetchAll();
+        $idSquadra1 = $data[0]['idsquadra1'];
+        $idSquadra2 = $data[0]['idsquadra2'];
+        $punteggiSquadra1 = [];
+        $punteggiSquadra2 = [];
+        foreach($data as $r){
+            $riga = new Validazionepunteggi();
+            $riga->select(['idvalidazionepunteggi'=>$r['idvalidazionepunteggi']]);
+            $punteggiosquadra1 = $riga->getpunteggiosquadra1();
+            $punteggiosquadra2 = $riga->getpunteggiosquadra2();
+            $punteggiSquadra1[] = $punteggiosquadra1;
+            $punteggiSquadra2[] = $punteggiosquadra2;
+        }
+        if (count(array_unique($punteggiSquadra1)) === 1 && count(array_unique($punteggiSquadra2)) === 1){
+            $this->inserisciPunteggioPartita($idPartita, $idSquadra1, $data[0]['punteggiosquadra1']);
+            $this->inserisciPunteggioPartita($idPartita, $idSquadra2, $data[0]['punteggiosquadra2']);
+            return true;
+        }else{
+            UIMessage::setError(SCORE_MISMATCH);
+            foreach($data as $r){
+            $riga = new Validazionepunteggi();
+            $riga->select(['idvalidazionepunteggi'=>$r['idvalidazionepunteggi']]);
+            $riga->delete();
+            }
+            return false;
         }
     }
 

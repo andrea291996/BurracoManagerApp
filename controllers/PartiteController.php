@@ -29,6 +29,17 @@ class PartiteController extends Controller{
         $page->add("content", new PartiteView("partite/partite", ['data'=>$partite]));
         return $response;
     }
+
+    //AZIONI
+
+    //punteggio inserito da giocatore, dovrò poi essere validato
+    function inserisciMioPunteggio(Request $request, Response $response, $args){
+        $user = $request->getAttribute('user');
+        $data = $request->getParsedBody();
+        $this->partiteService->inserisciMioPunteggio($data, $user);
+        $idTorneo = $data['idtorneo'];
+        return $response->withHeader("Location", "./partite?idtorneo=$idTorneo")->withStatus(301);
+    }
   
 }
 
