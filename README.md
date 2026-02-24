@@ -97,12 +97,18 @@ Implementazione algoritmo per:
   - Il risultato viene salvato solo se tutte le squadre coinvolte inseriscono lo stesso punteggio
   - In caso di discrepanza → cancellazione record
 
+### Gestione Classifica
+- Classifica aggiornata ad ogni validazione del punteggio
+
 ---
 
 ## Funzionalità in Sviluppo
 
-### Gestione Classifica
-- Classifica aggiornata ad ogni validazione del punteggio
+### Info Torneo
+- Visualizzazione info relative a torneo e impatto impatto ambientale
+
+### Conclusione Automatica Torneo
+- Cambiamento di stato del torneo quando tutte le partite sono state completate.
 
 ---
 
