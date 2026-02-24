@@ -10,7 +10,7 @@ Web application per la gestione di tornei di burraco con formazione squadre, gen
 - **Slim Framework**
 - **Mustache** (Template Engine)
 - **Pattern MVC (Model – View – Controller)**
-- Database relazionale (MySQL / MariaDB)
+- Database relazionale (MySQL / InnoDB)
 
 ---
 
@@ -80,7 +80,7 @@ Slim viene utilizzato per il routing HTTP e la gestione middleware (sessioni, au
   - Nome
   - Stato iniziale
 
-### ▶ Avvio Torneo
+### Avvio Torneo
 - Cambio stato torneo da parte dell’amministratore
 - Generazione automatica delle partite
 
