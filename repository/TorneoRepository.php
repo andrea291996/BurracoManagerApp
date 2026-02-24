@@ -20,13 +20,14 @@ class TorneoRepository{
     protected $database;
     protected $squadraRepository;
     protected $utentiRepository;
+    protected $classificaRepository;
 
     public function __construct()
     {
         $this->database = Database::instance();
         $this->squadraRepository = new SquadraRepository();
         $this->utentiRepository = new UtentiRepository();
-
+        $this->classificaRepository = new ClassificaRepository();
     }
 
     public function dammiStatoTorneo($torneoId): null | string{
@@ -161,6 +162,7 @@ class TorneoRepository{
         $single = $this->squadraRepository->dammiGiocatoriSenzaSquadra($idTorneo);
         $circoli = $this->utentiRepository->dammiCircoliIscrittiTorneo($idTorneo);
         if(count($squadre)>1 && count($single)==0 && count($circoli) > 0){
+            $this->classificaRepository->creaClassifica($idTorneo);
             $torneo = new Tornei();
             $torneo->select(['idtorneo' => $idTorneo]);
             $torneo->setstatotorneo(STATUS_TOURNAMENT_ONGOING);

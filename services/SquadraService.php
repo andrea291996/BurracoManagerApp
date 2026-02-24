@@ -50,11 +50,17 @@ class SquadraService{
         $squadre = $this->squadraRepository->dammiSquadrePerTorneo($idTorneo);
         $data = [];
         foreach($squadre as $squadra){
-            $idGiocatoreMittente = $squadra->getidcompagnomittente();
+            $data[] = $this->ottieniSquadraCompleta($squadra);
+        }
+        return $data;
+    }
+
+    public function ottieniSquadraCompleta($squadra){
+        $idGiocatoreMittente = $squadra->getidcompagnomittente();
             $giocatoreMittente = $this->utentiRepository->dammiGiocatore($idGiocatoreMittente);
             $idGiocatoreDestinatario = $squadra->getidcompagnodestinatario();
             $giocatoreDestinatario = $this->utentiRepository->dammiGiocatore($idGiocatoreDestinatario);
-            $data[] = [
+            $squadra = [
                 'giocatoremittente' => [
                     'nome'=>$giocatoreMittente->getnome(),
                     'cognome' =>$giocatoreMittente->getcognome()
@@ -64,8 +70,7 @@ class SquadraService{
                     'cognome'=>$giocatoreDestinatario->getcognome()
                 ]
             ];
-        }
-        return $data;
+        return $squadra;
     }
 
     public function ottieniRichiesteRicevute($user, $torneoId): array{

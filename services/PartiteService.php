@@ -10,12 +10,14 @@ class PartiteService{
     protected $utentiRepository;
     protected $squadraRepository;
     protected $partiteRepository;
+    protected $classificaRepository;
 
     public function __construct()
     {
         $this->utentiRepository = new UtentiRepository;
         $this->squadraRepository = new SquadraRepository;
         $this->partiteRepository = new PartiteRepository;
+        $this->classificaRepository = new ClassificaRepository;
     }
 
     public function inserisciPartite($partite, $idTorneo){

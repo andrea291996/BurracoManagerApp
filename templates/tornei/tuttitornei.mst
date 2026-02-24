@@ -25,7 +25,10 @@
                 {{/calendario}}
 
                 {{#classifica}}
-                <button class="btn-outline">Classifica</button>
+                    <form method="GET" action="classifica">
+                        <input type="hidden" name="idtorneo" value="{{id_torneo}}">
+                        <button class="btn-outline">Classifica</button>
+                    </form>
                 {{/classifica}}
             </div>
 

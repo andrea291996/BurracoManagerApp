@@ -303,3 +303,52 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+/* ==========================================================================
+   10. CLASSIFICA TABLE (BRUTALIST STYLE)
+   ========================================================================== */
+.classifica-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: inherit;
+}
+
+.classifica-table thead tr {
+    background: #f0f0f0;
+    border-bottom: 4px solid #000;
+}
+
+.classifica-table th {
+    padding: 20px;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.classifica-table td {
+    padding: 20px;
+    border-bottom: 4px solid #000;
+    vertical-align: middle;
+}
+
+.classifica-table .col-pos { width: 80px; font-size: 1.8rem; font-weight: 900; letter-spacing: -2px; }
+.classifica-table .col-punti { width: 120px; text-align: right; font-size: 2rem; font-weight: 900; letter-spacing: -1px; }
+
+.classifica-team-name { font-weight: 900; text-transform: uppercase; font-size: 1.2rem; line-height: 1; }
+.classifica-player { display: block; margin-bottom: 5px; }
+
+.row-highlight { background: #ffff00 !important; } /* Giallo per la propria squadra */
+
+.badge-mine {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    margin-top: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+/* Rimuove l'ultimo bordo per non doppiare quello della card */
+.classifica-table tr:last-child td { border-bottom: none; }

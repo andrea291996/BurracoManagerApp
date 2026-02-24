@@ -12,6 +12,7 @@ tabella punteggiopartita per squadra
 class PartiteRepository{
 
     protected $squadraRepository;
+    protected $classificaRepository;
     protected $torneoRepository;
     protected $database;
 
@@ -20,6 +21,7 @@ class PartiteRepository{
         $this->database = Database::instance();
         $this->squadraRepository = new SquadraRepository();
         $this->torneoRepository = new TorneoRepository();
+        $this->classificaRepository = new ClassificaRepository();
     }
 
     public function dammiPartitePerTorneo($idTorneo){
@@ -53,8 +55,6 @@ class PartiteRepository{
         }
     }
 
-    
-
     //AZIONI
 
     public function inserisciPartita($partitaArr, $idTorneo): bool{
@@ -70,6 +70,8 @@ class PartiteRepository{
     }
 
     public function inserisciPunteggioPartita($idPartita, $idSquadra, $punteggio): bool{
+        $idTorneo = $this->dammiPartitaPerId($idPartita)->getidtorneo();
+        $this->classificaRepository->aggiornaTotale($idTorneo, $idSquadra, $punteggio);
         $punteggioPartita = new Punteggipartita();
         $punteggioPartita->setidpartita($idPartita);
         $punteggioPartita->setidsquadra($idSquadra);
@@ -154,6 +156,11 @@ class PartiteRepository{
         if (count(array_unique($punteggiSquadra1)) === 1 && count(array_unique($punteggiSquadra2)) === 1){
             $this->inserisciPunteggioPartita($idPartita, $idSquadra1, $data[0]['punteggiosquadra1']);
             $this->inserisciPunteggioPartita($idPartita, $idSquadra2, $data[0]['punteggiosquadra2']);
+            foreach($data as $r){
+            $riga = new Validazionepunteggi();
+            $riga->select(['idvalidazionepunteggi'=>$r['idvalidazionepunteggi']]);
+            $riga->delete();
+            }
             return true;
         }else{
             UIMessage::setError(SCORE_MISMATCH);

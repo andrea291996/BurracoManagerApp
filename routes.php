@@ -51,6 +51,11 @@ $routes['GET'] = [
         'pattern' => '/tuttesquadre',
         'callable' => 'SquadraController:mostraTutteSquadre'
     ],
+    //CLASSIFICA
+    [
+        'pattern' => '/classifica',
+        'callable' => 'ClassificaController:mostraClassifica'
+    ],
     //ISCRITTI
     [
         'pattern' => '/giocatoriiscrittitorneo',

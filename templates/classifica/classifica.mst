@@ -1,0 +1,42 @@
+<div class="tornei-wrapper">
+
+    <div class="torneo-card">
+        <div class="card-header">
+            <h2>{{nometorneo}}</h2>
+        </div>
+        
+        <div class="card-body" style="padding: 0;"> 
+            <table class="classifica-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos"></th>
+                        <th>Squadra</th>
+                        <th class="col-punti">Punti</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#data}}
+                    <tr class="{{#is_mia_squadra}}row-highlight{{/is_mia_squadra}}">
+                        <td class="col-pos">#{{posizione}}</td>
+                        <td>
+                            <div class="classifica-team-name">
+                                <span class="classifica-player">{{nome1}} {{cognome1}}</span>
+                                <span class="classifica-player">{{nome2}} {{cognome2}}</span>
+                            </div>
+                            {{#is_mia_squadra}}
+                                <span class="badge-mine">LA TUA SQUADRA</span>
+                            {{/is_mia_squadra}}
+                        </td>
+                        <td class="col-punti">{{totale}}</td>
+                    </tr>
+                    {{/data}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {{#is_admin}}
+    
+    {{/is_admin}}
+
+</div>
