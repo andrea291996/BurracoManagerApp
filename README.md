@@ -104,6 +104,9 @@ Implementazione algoritmo per:
 
 ## Funzionalità in Sviluppo
 
+### Calendario
+- Visualizzazione calendario partite 
+
 ### Info Torneo
 - Visualizzazione info relative a torneo e impatto impatto ambientale
 
