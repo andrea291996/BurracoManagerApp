@@ -91,15 +91,18 @@ Implementazione algoritmo per:
 - Minimizzare la distanza geografica tra squadre
 - Ridurre l’impatto ambientale (logica di ottimizzazione)
 
----
-
-## Funzionalità in Sviluppo
-
 ### Gestione e Validazione Punteggi
 - Ogni squadra inserisce il punteggio della partita
 - Sistema di validazione:
   - Il risultato viene salvato solo se tutte le squadre coinvolte inseriscono lo stesso punteggio
-  - In caso di discrepanza → stato "in verifica"
+  - In caso di discrepanza → cancellazione record
+
+---
+
+## Funzionalità in Sviluppo
+
+### Gestione Classifica
+- Classifica aggiornata ad ogni validazione del punteggio
 
 ---
 
