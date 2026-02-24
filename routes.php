@@ -37,6 +37,11 @@ $routes['GET'] = [
         'pattern' => '/creanuovotorneo',
         'callable' => 'TorneoController:mostraCreaNuovoTorneo'
     ],
+    //CALENDARIO
+    [
+        'pattern' => '/calendario',
+        'callable' => 'CalendarioController:mostraCalendario'
+    ],
     //PARTITE
     [
         'pattern' => '/partite',

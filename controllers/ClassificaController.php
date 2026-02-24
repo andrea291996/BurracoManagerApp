@@ -19,7 +19,7 @@ class ClassificaController extends Controller{
         $user = $request->getAttribute('user');
         $classifica = $this->classificaService->ottieniClassifica($torneoId, $user);
         $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => 'tornei', 'titolo' => "Classifica"]));
-        $page->add("content", new ClassificaView("classifica/classifica", ['data' => $classifica['data'], 'nometorneo'=>$classifica['nometorneo'],'is_admin' => ($user->dimmiTipolgiaUtente() == "amministratore")]));
+        $page->add("content", new ClassificaView("classifica/classifica", ['data' => $classifica['data'], 'nometorneo'=>$classifica['nometorneo'],'statotorneo'=>$classifica['statotorneo'], 'is_admin' => ($user->dimmiTipolgiaUtente() == "amministratore")]));
         return $response;
         }
         

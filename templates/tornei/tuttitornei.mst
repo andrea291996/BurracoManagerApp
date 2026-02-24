@@ -17,11 +17,17 @@
             <p class="section-label">Consultazione</p>
             <div class="btn-group">
                 {{#pulsante_info}}
-                <button class="btn-black">Dettagli</button>
+                    <form method="GET" action="info">
+                        <input type="hidden" name="idtorneo" value="{{id_torneo}}">
+                        <button class="btn-black">Dettagli</button>
+                    </form>
                 {{/pulsante_info}}
 
                 {{#calendario}}
-                <button class="btn-outline">Calendario</button>
+                    <form method="GET" action="calendario">
+                        <input type="hidden" name="idtorneo" value="{{id_torneo}}">
+                        <button class="btn-outline">Calendario</button>
+                    </form>
                 {{/calendario}}
 
                 {{#classifica}}

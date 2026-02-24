@@ -25,7 +25,7 @@ class PartiteRepository{
     }
 
     public function dammiPartitePerTorneo($idTorneo){
-        $sql = "SELECT * FROM partite WHERE idtorneo = ?";
+        $sql = "SELECT * FROM partite WHERE idtorneo = ? ORDER BY giornata, turno";
         $sth = $this->database->prepare($sql);
         $sth->execute([$idTorneo]);
         $partiteGrezze = $sth->fetchAll();

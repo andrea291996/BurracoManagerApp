@@ -1,0 +1,56 @@
+<div class="tornei-wrapper">
+    <div class="torneo-card">
+        <div class="card-header">
+            <h2>{{nometorneo}}</h2>
+            <span class="status-badge">{{statotorneo}}</span>
+        </div>
+        
+        <div class="card-body card-body-flush"> 
+            <table class="classifica-table">
+                <thead>
+                    <tr>
+                        <th class="col-giorno">Giorno</th>
+                        <th class="col-sfidanti">Sfidanti</th>
+                        <th class="col-circolo">Circolo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#partite}}
+                    <tr class="{{#is_mia_partita}}row-highlight{{/is_mia_partita}}">
+                        <td class="col-pos col-giorno">
+                            <span class="label-giornata">GIORNATA {{giornata}}</span>
+                            <span class="label-turno">TURNO {{turno}}</span>
+                        </td>
+
+                        <td>
+                            <div class="match-container">
+                                <div class="classifica-team-name team-left">
+                                    <span class="classifica-player">{{s1_n1}} {{s1_c1}}</span>
+                                    <span class="classifica-player">{{s1_n2}} {{s1_c2}}</span>
+                                </div>
+
+                                <div class="vs-divider">VS</div>
+
+                                <div class="classifica-team-name team-right">
+                                    <span class="classifica-player">{{s2_n1}} {{s2_c1}}</span>
+                                    <span class="classifica-player">{{s2_n2}} {{s2_c2}}</span>
+                                </div>
+                            </div>
+
+                            {{#is_mia_partita}}
+                                <div style="text-align: center;">
+                                    <span class="badge-mine">LA TUA PARTITA</span>
+                                </div>
+                            {{/is_mia_partita}}
+                        </td>
+
+                        <td class="col-circolo">
+                            {{nome_circolo}}
+                        </td>
+                    </tr>
+                    {{/partite}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

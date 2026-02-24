@@ -3,6 +3,7 @@
     <div class="torneo-card">
         <div class="card-header">
             <h2>{{nometorneo}}</h2>
+            <span class="status-badge">{{statotorneo}}</span>
         </div>
         
         <div class="card-body" style="padding: 0;"> 

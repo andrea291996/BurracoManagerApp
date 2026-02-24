@@ -15,7 +15,7 @@ class PartiteController extends Controller{
         $page = PageConfigurator::instance()->getPage(); 
         $page->setTitle("Le mie partite");
         $user = $request->getAttribute('user');
-        $idTorneo = $request->getQueryParams('idtorneo');
+        $idTorneo = $request->getQueryParams();
         $idTorneo = $idTorneo['idtorneo'];
         $partite = $this->partiteService->ottieniPartite($user, $idTorneo);
         $referer = $request->getHeaderLine('Referer');

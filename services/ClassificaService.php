@@ -44,7 +44,7 @@ class ClassificaService{
             'totale' => $c->gettotale() ?? 0 
         ];
     }
-    return ['nometorneo'=>$this->torneoRepository->dammiTorneo($idTorneo)->getnometorneo(), 'data'=>$data];
+    return ['nometorneo'=>$this->torneoRepository->dammiTorneo($idTorneo)->getnometorneo(),'statotorneo' => $this->torneoRepository->dammiStatoTorneo($idTorneo), 'data'=>$data];
 }
 
 }

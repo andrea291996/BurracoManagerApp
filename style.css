@@ -352,3 +352,84 @@ input::-webkit-inner-spin-button {
 
 /* Rimuove l'ultimo bordo per non doppiare quello della card */
 .classifica-table tr:last-child td { border-bottom: none; }
+
+/* ==========================================================================
+   11. CALENDARIO SPECIFICO
+   ========================================================================== */
+
+.card-body-flush {
+    padding: 0 !important;
+}
+
+.match-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.team-left {
+    flex: 1;
+    text-align: right;
+}
+
+.team-right {
+    flex: 1;
+    text-align: left;
+}
+
+.vs-divider {
+    font-weight: 900;
+    font-size: 0.8rem;
+    background: #000;
+    color: #fff;
+    padding: 5px 8px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+/* Allineamento larghezze colonne */
+.col-giorno { 
+    width: 160px; 
+}
+.col-circolo { 
+    width: 200px; 
+    /* Rimosso font-size piccolo: erediterà quello di .classifica-table th */
+}
+
+/* Stile contenuto celle (body) */
+.label-giornata {
+    font-size: 1rem;
+    display: block;
+    font-weight: 800;
+    opacity: 0.7;
+}
+
+.label-turno {
+    font-size: 1rem; /* Leggermente più grande per richiamare la col-pos della classifica */
+    font-weight: 900;
+    display: block;
+    line-height: 1;
+}
+
+/* Assicuriamoci che i TH del calendario siano uguali a quelli della classifica */
+.classifica-table th.col-giorno,
+.classifica-table th.col-circolo {
+    font-size: 1.2rem; /* Come la classifica */
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: 20px;
+}
+
+/* Il testo del circolo nel corpo della tabella */
+td.col-circolo {
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+.classifica-table th.col-sfidanti {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
