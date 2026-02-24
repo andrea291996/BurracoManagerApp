@@ -11,6 +11,7 @@ class ClassificaService{
     protected $squadraRepository;
     protected $squadraService;
     protected $torneoRepository;
+    protected $utentiRepository;
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class ClassificaService{
         $this->squadraRepository = new SquadraRepository;
         $this->squadraService = new SquadraService;
         $this->torneoRepository = new TorneoRepository;
+        $this->utentiRepository = new UtentiRepository;
     }
 
     public function ottieniClassifica($idTorneo, $user): array {

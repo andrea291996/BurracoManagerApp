@@ -16,38 +16,41 @@
                 </thead>
                 <tbody>
                     {{#partite}}
-                    <tr class="{{#is_mia_partita}}row-highlight{{/is_mia_partita}}">
-                        <td class="col-pos col-giorno">
-                            <span class="label-giornata">GIORNATA {{giornata}}</span>
-                            <span class="label-turno">TURNO {{turno}}</span>
-                        </td>
+                        <tr class="{{#is_mia_partita}}row-highlight{{/is_mia_partita}} {{#is_mio_circolo}}row-mio-circolo{{/is_mio_circolo}}">
+                            <td class="col-pos col-giorno">
+                                <span class="label-giornata">GIORNATA {{giornata}}</span>
+                                <span class="label-turno">TURNO {{turno}}</span>
+                            </td>
 
-                        <td>
-                            <div class="match-container">
-                                <div class="classifica-team-name team-left">
-                                    <span class="classifica-player">{{s1_n1}} {{s1_c1}}</span>
-                                    <span class="classifica-player">{{s1_n2}} {{s1_c2}}</span>
+                            <td>
+                                <div class="match-container">
+                                    <div class="classifica-team-name team-left">
+                                        <span class="classifica-player">{{s1_n1}} {{s1_c1}}</span>
+                                        <span class="classifica-player">{{s1_n2}} {{s1_c2}}</span>
+                                    </div>
+                                    <div class="vs-divider">VS</div>
+                                    <div class="classifica-team-name team-right">
+                                        <span class="classifica-player">{{s2_n1}} {{s2_c1}}</span>
+                                        <span class="classifica-player">{{s2_n2}} {{s2_c2}}</span>
+                                    </div>
                                 </div>
 
-                                <div class="vs-divider">VS</div>
+                                {{#is_mia_partita}}
+                                    <div style="text-align: center;">
+                                        <span class="badge-mine">LA TUA PARTITA</span>
+                                    </div>
+                                {{/is_mia_partita}}
+                            </td>
 
-                                <div class="classifica-team-name team-right">
-                                    <span class="classifica-player">{{s2_n1}} {{s2_c1}}</span>
-                                    <span class="classifica-player">{{s2_n2}} {{s2_c2}}</span>
-                                </div>
-                            </div>
-
-                            {{#is_mia_partita}}
-                                <div style="text-align: center;">
-                                    <span class="badge-mine">LA TUA PARTITA</span>
-                                </div>
-                            {{/is_mia_partita}}
-                        </td>
-
-                        <td class="col-circolo">
-                            {{nome_circolo}}
-                        </td>
-                    </tr>
+                            <td class="col-circolo">
+                                {{nome_circolo}}
+                                {{#is_mio_circolo}}
+                                    <div style="margin-top: 5px;">
+                                        <span class="badge-circolo">IL TUO CIRCOLO</span>
+                                    </div>
+                                {{/is_mio_circolo}}
+                            </td>
+                        </tr>  
                     {{/partite}}
                 </tbody>
             </table>

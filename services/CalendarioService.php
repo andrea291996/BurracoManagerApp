@@ -26,15 +26,20 @@ class CalendarioService{
     $partite = $this->partiteRepository->dammiPartitePerTorneo($idTorneo);
     $partiteArray = [];
     $idMiaSquadra = null;
+    $idMioCircolo = null;
     if ($user->dimmiTipolgiaUtente() == "giocatore") {
         $miaSquadraObj = $this->squadraRepository->dammiSquadra($user->getidgiocatore(), $idTorneo);
         if ($miaSquadraObj) {
             $idMiaSquadra = $miaSquadraObj->getidsquadra();
         }
     }
+    if($user->dimmiTipolgiaUtente() == "circolo"){
+        $idMioCircolo = $user->getidcircolo();
+    }
     foreach ($partite as $partita) {
         $idSquadra1 = $partita->getidsquadra1();
         $idSquadra2 = $partita->getidsquadra2();
+        $isMioCircolo = ($idMioCircolo != null && $partita->getidcircolo() == $idMioCircolo);
         $isMiaPartita = ($idMiaSquadra !== null && ($idMiaSquadra == $idSquadra1 || $idMiaSquadra == $idSquadra2));
         $squadra1Obj = $this->squadraRepository->dammiSquadraPerSquadraId($idSquadra1);
         $squadra2Obj = $this->squadraRepository->dammiSquadraPerSquadraId($idSquadra2);
@@ -46,6 +51,7 @@ class CalendarioService{
             'turno'  => $partita->getturno(),
             'nome_circolo'  => $circolo->getnome(),
             'is_mia_partita' => $isMiaPartita,
+            'is_mio_circolo' => $isMioCircolo,
             's1_n1' => $squadra1Dettaglio['giocatoremittente']['nome'],
             's1_c1' => $squadra1Dettaglio['giocatoremittente']['cognome'],
             's1_n2' => $squadra1Dettaglio['giocatoredestinatario']['nome'],
