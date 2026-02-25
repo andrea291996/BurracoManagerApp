@@ -106,13 +106,20 @@ Implementazione algoritmo per:
 ### Info Torneo
 - Visualizzazione info relative a torneo e impatto impatto ambientale
 
+### Conclusione Automatica Torneo
+- Cambiamento di stato del torneo quando tutte le partite sono state completate.
+
 ---
 
 ## Funzionalità in Sviluppo
 
-### Conclusione Automatica Torneo
-- Cambiamento di stato del torneo quando tutte le partite sono state completate.
+### Gestione Sicurezza e Permessi
 
+### Gestione utenti e circoli Amministrazione
+- Cancella, Modifica, Inserisci
+
+### Profilo utenti
+- Visualizza, Modifica
 ---
 
 ## Logica di Dominio
