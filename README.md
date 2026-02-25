@@ -100,15 +100,15 @@ Implementazione algoritmo per:
 ### Gestione Classifica
 - Classifica aggiornata ad ogni validazione del punteggio
 
----
-
-## Funzionalità in Sviluppo
-
 ### Calendario
 - Visualizzazione calendario partite 
 
 ### Info Torneo
 - Visualizzazione info relative a torneo e impatto impatto ambientale
+
+---
+
+## Funzionalità in Sviluppo
 
 ### Conclusione Automatica Torneo
 - Cambiamento di stato del torneo quando tutte le partite sono state completate.
