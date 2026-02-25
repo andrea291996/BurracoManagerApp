@@ -36,8 +36,11 @@ class PartiteController extends Controller{
     function inserisciMioPunteggio(Request $request, Response $response, $args){
         $user = $request->getAttribute('user');
         $data = $request->getParsedBody();
-        $this->partiteService->inserisciMioPunteggio($data, $user);
+        $risultato = $this->partiteService->inserisciMioPunteggio($data, $user);
         $idTorneo = $data['idtorneo'];
+        if($risultato == "TORNEO_CONCLUSO"){
+            return $response->withHeader("Location", "./classifica?idtorneo=$idTorneo")->withStatus(301);
+        }
         return $response->withHeader("Location", "./partite?idtorneo=$idTorneo")->withStatus(301);
     }
   

@@ -157,6 +157,13 @@ class TorneoRepository{
         return (bool)$torneo->insert();
     }
 
+    public function chiudiTorneo($idTorneo){
+        $torneo = new Tornei();
+        $torneo->select(['idtorneo' => $idTorneo]);
+        $torneo->setstatotorneo(STATUS_TOURNAMENT_CLOSED);
+        $torneo->update();
+    }
+
     public function chiudiIscrizioni($idTorneo): bool{
         $squadre = $this->squadraRepository->dammiSquadrePerTorneo($idTorneo);
         $single = $this->squadraRepository->dammiGiocatoriSenzaSquadra($idTorneo);

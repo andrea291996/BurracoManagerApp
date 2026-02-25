@@ -185,6 +185,16 @@ class PartiteRepository{
         }
     }   
 
+    public function controllaSeTuttePartiteHannoPunteggio($idTorneo){
+        $partite = $this->dammiPartitePerTorneo($idTorneo);
+        foreach($partite as $partita){
+            if(!$this->esistePunteggioPartita($partita->getidpartita())){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function esistePunteggioPartita($idPartita){
         $sql = "SELECT * FROM punteggipartita WHERE idpartita = ?";
         $sth = $this->database->prepare($sql);

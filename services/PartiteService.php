@@ -11,6 +11,7 @@ class PartiteService{
     protected $squadraRepository;
     protected $partiteRepository;
     protected $classificaRepository;
+    protected $torneoRepository;
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class PartiteService{
         $this->squadraRepository = new SquadraRepository;
         $this->partiteRepository = new PartiteRepository;
         $this->classificaRepository = new ClassificaRepository;
+        $this->torneoRepository = new TorneoRepository;
     }
 
     public function inserisciPartite($partite, $idTorneo){
@@ -117,10 +119,13 @@ class PartiteService{
             if($this->partiteRepository->hannoTuttiIGiocatoriInseritoIlPunteggio($data['idpartita'])){
                 if($this->partiteRepository->controllaSePunteggiCoincidono($data['idpartita'])){
                     UIMessage::setSuccess(SCORE_MATCH_SUCCESS);
+                    if($this->partiteRepository->controllaSeTuttePartiteHannoPunteggio($data['idtorneo'])){
+                        $this->torneoRepository->chiudiTorneo($data['idtorneo']);
+                        UIMessage::setSuccess(TOURNAMENT_FINISHED_SUCCESS);
+                        return "TORNEO_CONCLUSO";
+                    }
                 }
             }
         }
-    }
-
-    
+    }   
 }

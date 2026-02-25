@@ -33,6 +33,7 @@ define("TOURNAMENT_CLOSE_FAILED_DETAIL", "Errore: sono presenti giocatori senza 
 define("STATUS_TOURNAMENT_OPEN", "aperto");
 define("STATUS_TOURNAMENT_CLOSED", "concluso");
 define("STATUS_TOURNAMENT_ONGOING", "in corso");
+define("TOURNAMENT_FINISHED_SUCCESS", "Tutte le partite sono finite. Il torneo è ufficialmente concluso!");
 
 // --- RICHIESTE TRA GIOCATORI ---
 define("REQUEST_SENT_SUCCESS", "Richiesta inviata con successo.");
