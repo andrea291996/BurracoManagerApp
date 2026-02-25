@@ -1,7 +1,3 @@
-<style>
-   
-</style>
-
 <nav class="nb-nav">
     <a href="{{brand.href}}" class="nb-brand">
         {{brand.title}}
@@ -9,10 +5,10 @@
 
     <ul class="nb-menu-list">
         {{#items}}
-            <li class="nb-menu-item" style="{{#isRight}}margin-left: auto;{{/isRight}}">
+            <li class="nb-menu-item {{#isRight}}nb-item-right{{/isRight}}">
                 {{#hasChilds}}
                     <div class="nb-dropdown-toggle">
-                        {{title}} <span style="margin-left: 8px; font-size: 0.6rem;">▼</span>
+                        {{title}} <span class="nb-arrow">▼</span>
                     </div>
                     
                     <ul class="nb-dropdown-menu">

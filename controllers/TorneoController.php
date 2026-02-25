@@ -100,6 +100,20 @@ class TorneoController extends Controller{
         }
     }
 
+    public function mostraInfo(Request $request, Response $response, $args){
+        $page = PageConfigurator::instance()->getPage(); 
+        $page->setTitle("Info");
+        $user = $request->getAttribute('user');
+        $idTorneo = $request->getQueryParams();
+        $idTorneo = $idTorneo['idtorneo'];
+        $info = $this->torneoService->ottieniInfo($idTorneo, $user);
+        $referer = $request->getHeaderLine('Referer');
+        $backUrl = (strpos($referer, 'mieitornei') !== false) ? 'mieitornei' : 'tornei';
+        $page->add("content", new HeaderView("ui/titoloeindietro", ['backUrl' => $backUrl, 'titolo' => "Informazioni"]));
+        $page->add("content", new IscrittiView("tornei/info",$info));
+        return $response;
+    }
+
     //AZIONI
 
     //POST

@@ -37,11 +37,6 @@ $routes['GET'] = [
         'pattern' => '/creanuovotorneo',
         'callable' => 'TorneoController:mostraCreaNuovoTorneo'
     ],
-    //CALENDARIO
-    [
-        'pattern' => '/calendario',
-        'callable' => 'CalendarioController:mostraCalendario'
-    ],
     //PARTITE
     [
         'pattern' => '/partite',
@@ -56,10 +51,20 @@ $routes['GET'] = [
         'pattern' => '/tuttesquadre',
         'callable' => 'SquadraController:mostraTutteSquadre'
     ],
+    //INFOTORNEO
+    [
+        'pattern' => '/info',
+        'callable' => 'TorneoController:mostraInfo'
+    ],
     //CLASSIFICA
     [
         'pattern' => '/classifica',
         'callable' => 'ClassificaController:mostraClassifica'
+    ],
+    //CALENDARIO
+    [
+        'pattern' => '/calendario',
+        'callable' => 'CalendarioController:mostraCalendario'
     ],
     //ISCRITTI
     [

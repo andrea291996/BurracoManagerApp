@@ -9,7 +9,95 @@ body {
 }
 
 .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+/* Struttura principale della Nav */
+.nb-nav {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #f8f9fa; /* Colore di esempio */
+    height: 60px;
+}
 
+.nb-brand {
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    font-size: 1.25rem;
+    margin-right: 20px;
+}
+
+/* Lista Menu */
+.nb-menu-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Necessario per spingere gli elementi a destra */
+}
+
+.nb-menu-item {
+    position: relative;
+    padding: 0 15px;
+}
+
+/* Classe per spingere l'elemento a destra (es. Login) */
+.nb-item-right {
+    margin-left: auto;
+}
+
+.nb-nav-link, .nb-dropdown-toggle {
+    text-decoration: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Freccina Dropdown */
+.nb-arrow {
+    margin-left: 8px;
+    font-size: 0.6rem;
+}
+
+/* Menu Dropdown (Nascosto di base) */
+.nb-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 10px 0;
+    min-width: 160px;
+    z-index: 1000;
+}
+
+/* Mostra dropdown al passaggio del mouse */
+.nb-menu-item:hover .nb-dropdown-menu {
+    display: block;
+}
+
+.nb-dropdown-link {
+    display: block;
+    padding: 8px 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.nb-dropdown-link:hover {
+    background-color: #f1f1f1;
+}
+
+/* Divisore */
+.nb-divider {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 5px 0;
+}
 /* ==========================================================================
    2. NAVIGATION (NB-NAV)
    ========================================================================== */
@@ -24,6 +112,7 @@ body {
     text-decoration: none; color: #000; font-weight: 900; 
     text-transform: uppercase; letter-spacing: 3px; font-size: 1.5rem; 
     padding: 20px 0; display: block;
+    text-align: center;
 }
 
 .nb-menu-list { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; height: 100%; }
@@ -454,4 +543,130 @@ td.col-circolo {
     font-weight: 900;
     border: 2px solid #000;
     text-align: center;
+}
+
+/* ==========================================================================
+   12. INFO TORNEO & MAPPA (COMPATTO)
+   ========================================================================== */
+
+.info-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px; /* Ridotto per avvicinare la mappa */
+}
+
+.card-stats {
+    padding: 25px;
+}
+
+.card-stats-dark {
+    background: #000;
+    color: #fff;
+}
+
+.stat-value {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.stat-label-sub {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Container Mappa specifico */
+.map-container-brutal {
+    height: 500px; /* Ridotto da 600px per evitare scroll eccessivo */
+    width: 100%;
+    z-index: 1;
+}
+
+.map-legend {
+    padding: 15px 20px;
+    border-top: 4px solid #000;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.legend-item { margin-right: 15px; }
+.dot-blue { color: blue; }
+.dot-red { color: red; }
+.dot-green { color: green; }
+
+/* --- INFO TORNEO & COMPARAZIONE --- */
+.info-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card-stats {
+    padding: 30px;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0px #000;
+    background: #fff;
+}
+
+.card-stats-dark {
+    background: #000;
+    color: #fff;
+}
+
+.card-stats-yellow {
+    background: #FFFF00; /* Giallo richiesto */
+    color: #000;
+}
+
+.stat-value {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 0.9;
+    margin: 10px 0;
+}
+
+.stat-label-sub {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.map-container-brutal {
+    height: 500px;
+    width: 100%;
+    border-top: 4px solid #000;
+}
+
+.map-legend {
+    padding: 15px;
+    background: #f0f0f0;
+    border-top: 4px solid #000;
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.legend-item { margin-right: 15px; }
+.dot-blue { color: blue; }
+.dot-red { color: red; }
+.dot-yellow { color: #b8b800; } /* Giallo scuro per leggibilità */
+
+.stat-value {
+    white-space: nowrap; /* Impedisce al testo di andare a capo */
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px; /* Spazio tra numero e unità */
+}
+
+.stat-value small.unit {
+    font-size: 0.5em; /* Rende l'unità grande la metà del numero */
+    font-weight: normal;
+    opacity: 0.8;
 }

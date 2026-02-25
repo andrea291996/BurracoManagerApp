@@ -1,0 +1,96 @@
+<div class="tornei-wrapper">
+
+    <div class="info-stats-grid">
+        <div class="torneo-card card-stats card-stats-dark">
+            <span class="label-giornata">TORNEO GREEN</span>
+            <div class="stat-value">{{km_totali}} <small>KM</small></div>
+            <p class="stat-label-sub">Distanza totale percorsa dai partecipanti.</p>
+        </div>
+
+        <div class="torneo-card card-stats">
+            <span class="label-giornata">TORNEO STANDARD</span>
+            <div class="stat-value">{{km_standard}} <small>KM</small></div>
+            <p class="stat-label-sub">Senza ottimizzazione baricentrica.</p>
+        </div>
+
+        <div class="torneo-card card-stats card-stats-yellow">
+            <span class="label-giornata">IMPATTO AMBIENTALE</span>
+            <div class="stat-value">{{co2_risparmiata}} <small class="unit">KG CO₂</small></div>
+            <p class="stat-label-sub">Efficienza Logistica: <b>-{{risparmio_percent}}% km</b></p>
+        </div>
+    </div>
+
+    <div class="torneo-card">
+        <div class="card-header">
+            <h2>Mappa Strategica di Prossimità</h2>
+        </div>
+        <div class="card-body card-body-flush">
+            <div id="map" class="map-container-brutal"></div>
+        </div>
+        <div class="map-legend">
+            <span class="legend-item"><span class="dot-blue" style="color:#2b82cb">●</span> Circoli Ospitanti</span>
+            <span class="legend-item"><span class="dot-red" style="color:#ff0000">●</span> Posizione Squadre</span>
+            <span class="legend-item"><span class="dot-green" style="color:#00FF00">○</span> Soglia Zero Emissioni</span>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Utilizziamo un try-catch per evitare crash se il JSON è malformato
+    try {
+        const dati = {{{mappaDatiJson}}};
+        
+        // Inizializzazione mappa con fallback su coordinate medie italiane se vuota
+        const map = L.map('map').setView([41.9028, 12.4964], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        const bounds = [];
+
+        // Marker Circoli
+        dati.circoli.forEach(c => {
+            const marker = L.marker([c.lat, c.lng]).addTo(map)
+                .bindPopup(`<b>Circolo: ${c.nome}</b>${c.is_mio ? '<br>(Tuo Circolo)' : ''}`);
+            bounds.push([c.lat, c.lng]);
+        });
+
+        // Marker Giocatori e Raggi Green
+        dati.giocatori.forEach(g => {
+            // Marker punto
+            L.circleMarker([g.lat, g.lng], {
+                radius: 6, 
+                color: '#000', 
+                fillColor: g.is_me ? '#FFFF00' : '#ff0000', 
+                fillOpacity: 1, 
+                weight: 2
+            }).addTo(map).bindPopup(g.is_me ? "Tua Posizione" : "Squadra Iscritta");
+
+            // Cerchio soglia non inquinante
+            L.circle([g.lat, g.lng], {
+                radius: g.soglia, 
+                color: '#28a745', // Verde più deciso
+                fillColor: '#28a745',
+                fillOpacity: 0.1, 
+                weight: 1
+            }).addTo(map);
+            
+            bounds.push([g.lat, g.lng]);
+        });
+
+        // Adattamento automatico dello zoom
+        if (bounds.length > 0) {
+            map.fitBounds(bounds, { padding: [50, 50] });
+        }
+        
+        // Fix per caricamento in tab o div nascosti
+        setTimeout(() => { map.invalidateSize(); }, 500);
+
+    } catch (e) {
+        console.error("Errore nel caricamento della mappa:", e);
+    }
+</script>

@@ -37,6 +37,7 @@ class DistanzeRepository{
                 $matriceDistanze[$idSquadra][$idCircolo] = $this->dammiDistanzaSquadraCircolo($squadra, $circolo);
             }
         }
+        //exit;
         return $matriceDistanze;
     }
 
@@ -54,6 +55,19 @@ class DistanzeRepository{
         $distanzaDispostoAfareSenzaInquinare1 = $this->dammiDistanzaDispostoAFareSenzaInquinare($compagno1) / 1000;
         $distanza2 = $this->calcolaDistanza($indirizzoCompagno2, $indirizzoCircolo);
         $distanzaDispostoAfareSenzaInquinare2 = $this->dammiDistanzaDispostoAFareSenzaInquinare($compagno2) / 1000;
+        /*var_dump([
+            'circolo' => $indirizzoCircolo,
+            'compagno1' => [
+                'id' => $idCompagno1,
+                'distanza_km' => $distanza1,
+                'distanza_soglia_km' => $distanzaDispostoAfareSenzaInquinare1
+            ],
+            'compagno2' => [
+                'id' => $idCompagno2,
+                'distanza_km' => $distanza2,
+                'distanza_soglia_km' => $distanzaDispostoAfareSenzaInquinare2
+            ]
+        ]);*/
         if($distanza1 < $distanzaDispostoAfareSenzaInquinare1){
             $distanza1 = 0;
         }
@@ -61,6 +75,7 @@ class DistanzeRepository{
             $distanza2 = 0;
         }
         $distanzaTotaleDaPercorrereInquinando = $distanza1 + $distanza2;
+        //var_Dump(['totale' => $distanzaTotaleDaPercorrereInquinando]);
         return $distanzaTotaleDaPercorrereInquinando;
     }
 
